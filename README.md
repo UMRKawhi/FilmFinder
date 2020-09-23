@@ -7,6 +7,3 @@ Group Members:
 + Ziwei Li
 + Mingyan Yu
 + Kaisen Luo
-# Work Recording
-## week1:
-We formed a team and registered Jira and github classroom. And read the description of the project. Prepare to learn web development related content by ourselves, and prepare for future project development
