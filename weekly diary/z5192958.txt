@@ -1,4 +1,8 @@
 COMP9900 H18A-ChongChongChong
 Yipeng Han z5192958
 
-Week1: In the first week, we formed a team and created jira and github. Our group met at the weekend and read the descriptions of the six projects together.
+Week1: 
+In the first week, we formed a team and created jira and github. Our group met at the weekend and read the descriptions of the six projects together.
+
+week2:
+I carefully studied the description of FilmFinders, and summarized and divided the functions of the project. I have an email discussion with Iwan for the confused function.
