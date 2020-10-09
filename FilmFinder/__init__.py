@@ -1,5 +1,5 @@
 from flask import Flask
-from . import admin
+from .admin import admin as admin_blueprint
 from .home import home as home_blueprint
 import os
 
@@ -25,7 +25,7 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    app.register_blueprint(admin.admin)
+    app.register_blueprint(admin_blueprint)
     app.register_blueprint(home_blueprint)
 
     return app
