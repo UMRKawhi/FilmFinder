@@ -1,13 +1,6 @@
 import datetime
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 
-
-app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:root@127.0.0.1:3306/film"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
-
-db = SQLAlchemy(app)
+from . import db
 
 class User(db.Model):
     __tablename__ = 'user'
