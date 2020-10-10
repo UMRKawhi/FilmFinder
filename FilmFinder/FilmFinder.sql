@@ -104,3 +104,64 @@ INSERT INTO `director` VALUES (2, NULL, NULL, NULL, NULL, NULL, 'Martin Scorsese
 INSERT INTO `director` VALUES (3, NULL, NULL, NULL, NULL, NULL, 'Quentin Tarantino', '2020-10-06 11:22:43');
 INSERT INTO `director` VALUES (4, NULL, NULL, NULL, NULL, NULL, 'Ridley Scott', '2020-10-06 11:22:45');
 INSERT INTO `director` VALUES (5, NULL, NULL, NULL, NULL, NULL, 'James Cameron', '2020-10-06 11:22:48');
+
+
+-- Table structure for blacklist
+
+DROP TABLE IF EXISTS `blacklist`;
+CREATE TABLE `blacklist`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `user_id`(`user_id`) USING BTREE,
+  INDEX `ix_blacklist_create_time`(`create_time`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+
+-- Table structure for film
+DROP TABLE IF EXISTS `film`;
+CREATE TABLE `film`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `logo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `star` smallint(6) DEFAULT NULL,
+  `play_num` bigint(20) DEFAULT NULL,
+  `comment_num` bigint(20) DEFAULT NULL,
+  `release_time` date DEFAULT NULL,
+  `release_length` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `name`(`name`) USING BTREE,
+  UNIQUE INDEX `logo`(`logo`) USING BTREE,
+  INDEX `ix_film_create_time`(`create_time`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+
+-- Records of film
+
+INSERT INTO `film` VALUES (3, 'The Lost World: Jurassic Park', 'The Lost World: Jurassic Park is a 1997 American science fiction adventure film and the second installment in the Jurassic Park film series. A sequel to 1993\'s Jurassic Park and loosely based on Michael Crichton\'s 1995 novel The Lost World, the film was directed by Steven Spielberg and written by David Koepp. The film stars Jeff Goldblum, returning as the eccentric chaos theorist and mathematician Ian Malcolm, as well as Julianne Moore, Pete Postlethwaite, Arliss Howard, Vince Vaughn, and Vanessa Lee Chester. Four years after the disaster at Jurassic Park, John Hammond (Richard Attenborough) sends a team, led by Malcolm, to Isla Sorna, the second island Hammond\'s company InGen used to make the dinosaurs, to study the animals while coming into conflict with a team led by InGen to bring some of the dinosaurs back to the United States.\r\n\r\nAfter the original novel\'s release and the first film\'s success, fans pressured Crichton for a sequel. Following the book\'s publication in 1995, production began on a film sequel. Filming took place from September to December 1996, primarily in California, with a shoot in Kauai, Hawaii, where the first film was shot. The Lost World\'s plot and imagery is substantially darker than Jurassic Park. It makes more extensive use of computer-generated imagery to depict the dinosaurs, along with life-sized animatronics.\r\n\r\nReleased on May 23, 1997, the film received mixed reviews from critics, who praised the visuals and action sequences, but criticized the writing, and character development. The film was a box office success, grossing over $618 million worldwide, becoming the second-highest-grossing film of 1997. It earned an Academy Award nomination for Best Visual Effects. A sequel, Jurassic Park III, was released on July 18, 2001.', '20201006143536afefcd5eb58043d2adc9b97c18596787.jpg', 3, 107, 3, '2020-10-25', '128', '2020-10-06 14:35:36');
+
+
+
+-- Table structure for genre
+
+DROP TABLE IF EXISTS `genre`;
+CREATE TABLE `genre`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `genre`(`name`) USING BTREE,
+  INDEX `ix_genre_create_time`(`create_time`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+
+-- Records of genre
+
+INSERT INTO `genre` VALUES (1, 'science', '2020-10-06 10:52:14');
+INSERT INTO `genre` VALUES (2, 'horror', '2020-10-06 10:56:29');
+INSERT INTO `genre` VALUES (3, 'action', '2020-10-06 10:56:33');
+INSERT INTO `genre` VALUES (5, 'animation', '2020-10-06 10:56:46');
+INSERT INTO `genre` VALUES (6, 'music', '2020-10-06 10:56:54');
