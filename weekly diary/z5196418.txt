@@ -1,11 +1,16 @@
 COMP9900 H18A-ChongChongChong
 Mingyan Yu z5196418
- 
-In first week 
+
+week 1:
 we formed a group and seleted the leader.
 we also created the corresponding group on github and jira
 we have a discussion and select a project 
 
 
-week 2
+week 2:
 We discuss and prepare the project proposal.
+
+week 3:
+We met and completed the proposal together.
+And talked about the tasks to be completed next week.
+
