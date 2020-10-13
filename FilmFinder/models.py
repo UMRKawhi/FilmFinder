@@ -1,19 +1,18 @@
 import datetime
-
-from .__init__ import db
+from . import db
 
 class User(db.Model):
     __tablename__ = 'user'
     # id
     id = db.Column(db.Integer, primary_key=True)
     # nick name
-    name = db.Column(db.Integer, unique=True,nullable=True)
+    name = db.Column(db.String(11), unique=True, nullable=True)
     # first name
     first_name = db.Column(db.String(20))
     # second name
     second_name = db.Column(db.String(20))
     # password
-    password = db.Column(db.String(11), nullable=False)
+    password = db.Column(db.String(255), nullable=False)
     # email
     email = db.Column(db.String(100), unique=True)
     # phone
@@ -28,15 +27,18 @@ class User(db.Model):
     comments = db.relationship('Comment', backref='user')
     # wishlist constraints
     wishlist = db.relationship('WishList', backref='user')
-    # blacklist constraints
-    blacklist = db.relationship('BlackList', backref='user')
-
+    # check password
+    def check_password(self, password):
+        from werkzeug.security import check_password_hash
+        return check_password_hash(self.password, password)
     # format output
     def __str__(self):
         return "<User %r>" % self.first_name + " " + self.second_name
+
     # format output
     def __repr__(self):
         return "<User %r>" % self.first_name + " " + self.second_name
+
 
 class UserLog(db.Model):
     __tablename__ = 'userlog'
@@ -46,31 +48,37 @@ class UserLog(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     # the ip address of login
     ip = db.Column(db.String(100))
+    # film id
+    film_id = db.Column(db.Integer)
     # log time
     log_time = db.Column(db.DateTime, index=True, default=datetime.datetime.now)
+
 
 class Genre(db.Model):
     __tablename__ = 'genre'
     # id
     id = db.Column(db.Integer, primary_key=True)
     # genre
-    genre = db.Column(db.String(100), unique=True)
+    name = db.Column(db.String(100), unique=True)
     # create time
     create_time = db.Column(db.DateTime, index=True, default=datetime.datetime.now)
     # foreign constraint of Film
-    film = db.relationship('Genre', backref='genre')
+    film = db.relationship('GenreTag', backref='genre')
 
     # format output
     def __str__(self):
-        return "<Genre %r>" % self.genre
+        return "<Genre %r>" % self.name
 
     def __repr__(self):
-        return "<Genre %r>" % self.genre
+        return "<Genre %r>" % self.name
+
 
 class Director(db.Model):
     __tablename__ = 'director'
     # id
     id = db.Column(db.Integer, primary_key=True)
+    # name
+    name = db.Column(db.String(100), nullable=False)
     # first name
     first_name = db.Column(db.String(20))
     # second name
@@ -84,18 +92,24 @@ class Director(db.Model):
     # foreign constraint of Film
     film = db.relationship('Direct', backref='director')
 
+    # create time
+    create_time = db.Column(db.DateTime, index=True, default=datetime.datetime.now)
+
     # format output
     def __str__(self):
-        return "<Director %r>" % self.first_name + " " + self.second_name
+        return "<Director %r>" % self.name
 
     # format output
     def __repr__(self):
-        return "<Director %r>" % self.first_name + " " + self.second_name
+        return "<Director %r>" % self.name
+
 
 class Cast(db.Model):
     __tablename__ = 'cast'
     # id
     id = db.Column(db.Integer, primary_key=True)
+    # name
+    name = db.Column(db.String(20), unique=True)
     # first name
     first_name = db.Column(db.String(20))
     # second name
@@ -108,6 +122,7 @@ class Cast(db.Model):
     face = db.Column(db.String(255))
     # works
     performance = db.relationship('Performance', backref='cast')
+
     # format output
     def __str__(self):
         return "<Cast %r>" % self.first_name + " " + self.second_name
@@ -115,6 +130,7 @@ class Cast(db.Model):
     # format output
     def __repr__(self):
         return "<Cast %r>" % self.first_name + " " + self.second_name
+
 
 class Film(db.Model):
     __tablename__ = 'film'
@@ -127,7 +143,7 @@ class Film(db.Model):
     # logo
     logo = db.Column(db.String(255), unique=True)
     # average rating
-    score = db.Column(db.SmallInteger)
+    star = db.Column(db.SmallInteger)
     # play number
     play_num = db.Column(db.BigInteger)
     # comment num
@@ -141,34 +157,15 @@ class Film(db.Model):
     # cast constraint
     performance = db.relationship('Performance', backref='film')
     # director constraint
-    direct = db.relationship('Direct', backref='film')
+    director = db.relationship('Direct', backref='film')
     # genre constraint
-    genre = db.relationship('Genre', backref='film')
+    genre = db.relationship('GenreTag', backref='film')
     # format output
     def __str__(self):
         return "<Film %r>" % self.name
 
     def __repr__(self):
         return "<Film %r>" % self.name
-
-
-
-class Preview(db.Model):
-    __tablename__ = 'preview'
-    # id
-    id = db.Column(db.Integer, primary_key=True)
-    # name
-    name = db.Column(db.String(255), unique=True)
-    # logo
-    logo = db.Column(db.String(255), unique=True)
-    # create time
-    create_time = db.Column(db.DateTime, index=True, default=datetime.datetime.now)
-
-    # format output
-    def __str__(self):
-        return "<Preview %r>" % self.name
-    def __repr__(self):
-        return "<Preview %r>" % self.name
 
 class Comment(db.Model):
     __tablename__ = 'comment'
@@ -180,6 +177,8 @@ class Comment(db.Model):
     film_id = db.Column(db.Integer, db.ForeignKey('film.id'))
     # user id
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    # score
+    score = db.Column(db.Integer)
     # create time
     create_time = db.Column(db.DateTime, index=True, default=datetime.datetime.now)
     # score
@@ -191,6 +190,7 @@ class Comment(db.Model):
 
     def __repr__(self):
         return "<Comment %r>" % self.id
+
 
 class Direct(db.Model):
     __tablename__ = 'direct'
@@ -210,24 +210,6 @@ class Direct(db.Model):
     def __repr__(self):
         return "<Direct %r>" % self.id
 
-class performance(db.Model):
-    __tablename__ = 'performance'
-    # id
-    id = db.Column(db.Integer, primary_key=True)
-    # film id
-    film_id = db.Column(db.Integer, db.ForeignKey('film.id'))
-    # director id
-    cast_id = db.Column(db.Integer, db.ForeignKey('cast.id'))
-    # create time
-    create_time = db.Column(db.DateTime, index=True, default=datetime.datetime.now)
-
-    # format output
-    def __str__(self):
-        return "<Cast %r>" % self.id
-
-    def __repr__(self):
-        return "<Cast %r>" % self.id
-
 class GenreTag(db.Model):
     __tablename__ = 'genretag'
     # id
@@ -246,14 +228,36 @@ class GenreTag(db.Model):
     def __repr__(self):
         return "<GenreTag %r>" % self.id
 
+
+class Performance(db.Model):
+    __tablename__ = 'performance'
+    # id
+    id = db.Column(db.Integer, primary_key=True)
+    # film id
+    film_id = db.Column(db.Integer, db.ForeignKey('film.id'))
+    # director id
+    cast_id = db.Column(db.Integer, db.ForeignKey('cast.id'))
+    # create time
+    create_time = db.Column(db.DateTime, index=True, default=datetime.datetime.now)
+
+    # format output
+    def __str__(self):
+        return "<Cast %r>" % self.id
+
+    def __repr__(self):
+        return "<Cast %r>" % self.id
+
+
+
+
+
 class BlackList(db.Model):
     __tablename__ = 'blacklist'
     # id
     id = db.Column(db.Integer, primary_key=True)
     # user id
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    # black id
-    black_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
     # create time
     create_time = db.Column(db.DateTime, index=True, default=datetime.datetime.now)
 
@@ -263,6 +267,7 @@ class BlackList(db.Model):
 
     def __repr__(self):
         return "<BlackList %r>" % self.id
+
 
 class WishList(db.Model):
     __tablename__ = 'wishlist'
@@ -278,46 +283,10 @@ class WishList(db.Model):
     # format output
     def __str__(self):
         return "<WishList %r>" % self.id
+
     def __repr__(self):
         return "<WishList %r>" % self.id
 
-class Auth(db.Model):
-    __tablename__ = 'auth'
-    # id
-    id = db.Column(db.Integer, primary_key=True)
-    # name
-    name = db.Column(db.String(100), unique=True)
-    # url
-    url = db.Column(db.String(255), unique=True)
-    # create_time
-    create_time = db.Column(db.DateTime, index=True, default=datetime.datetime.now)
-
-    # format output
-    def __str__(self):
-        return "<Auth %r>" % self.name
-
-    def __repr__(self):
-        return "<Auth %r>" % self.name
-
-class Role(db.Model):
-    __tablename__ = 'role'
-    # id
-    id = db.Column(db.Integer, primary_key=True)
-    # name
-    name = db.Column(db.String(100), unique=True)
-    # auths
-    auths = db.Column(db.String(600))
-    # create time
-    create_time = db.Column(db.DateTime, index=True, default=datetime.datetime.now)
-    # admin role relation
-    admins = db.relationship('Admin', backref='role')
-
-    # format output
-    def __str__(self):
-        return "<Role %r>" % self.name
-
-    def __repr__(self):
-        return "<Role %r>" % self.name
 
 class Admin(db.Model):
     __tablename__ = 'admin'
@@ -327,25 +296,20 @@ class Admin(db.Model):
     name = db.Column(db.String(100), unique=True)
     # password
     password = db.Column(db.String(100), nullable=True)
-    # is super admin
-    is_super = db.Column(db.SmallInteger)
-    # role id
-    role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
-    # create time
-    create_time = db.Column(db.DateTime, index=True, default=datetime.datetime.now)
     # admin log
     adminlogs = db.relationship('AdminLog', backref='admin')
     operatelogs = db.relationship('OperateLog', backref='operatelog')
 
-    def check_pwd(self, input_pwd):
+    def check_pwd(self, password):
         from werkzeug.security import check_password_hash
-        return check_password_hash(self.pwd, input_pwd)
+        return check_password_hash(self.password, password)
 
     def __str__(self):
         return "<Admin %r>" % self.name
 
     def __repr__(self):
         return "<Admin %r>" % self.name
+
 
 class AdminLog(db.Model):
     __tablename__ = "adminlog"
@@ -363,6 +327,7 @@ class AdminLog(db.Model):
 
     def __repr__(self):
         return "<Adminlog %r>" % self.id
+
 
 class OperateLog(db.Model):
     __tablename__ = "operatelog"
@@ -383,6 +348,7 @@ class OperateLog(db.Model):
 
     def __repr__(self):
         return "Operatelog %r" % self.id
+
 
 if __name__ == '__main__':
     print(db)
