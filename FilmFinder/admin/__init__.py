@@ -1,4 +1,7 @@
-# define blueprint of manage function
 from flask import Blueprint
-from . import views
+from FilmFinder.admin import views
+
 admin = Blueprint("admin", "admin", url_prefix="/admin")
+
+
+

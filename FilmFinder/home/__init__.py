@@ -1,5 +1,4 @@
 from flask import Blueprint
-from . import views
+from FilmFinder.home import views
 
 home = Blueprint("home", __name__)
-

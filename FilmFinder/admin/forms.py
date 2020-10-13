@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField, FileField, SelectMultipleField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField, FileField, SelectMultipleField, DateTimeField,DateField
 from wtforms.validators import DataRequired, ValidationError, EqualTo
-from ..models import Admin, Genre
+from FilmFinder.models import Admin, Genre, Director, User
 
 
 class LoginFrom(FlaskForm):
@@ -63,10 +63,51 @@ class GenreForm(FlaskForm):
             'class': "btn btn-primary"
         }
     )
+class DirectorForm(FlaskForm):
+    name = StringField(
+        label='director',
+        validators=[
+            DataRequired('it can not be empty!')
+        ],
+        description='director',
+        render_kw={
+            'class': "form-control",
+            'id': "input_name",
+            'placeholder': "please input director!"
+        }
+    )
+    submit = SubmitField(
+        label='submit',
+        render_kw={
+            'class': "btn btn-primary"
+        }
+    )
+class BlackForm(FlaskForm):
+    user_id = SelectField(
+        label='genre',
+        validators=[
+            DataRequired('please select genre！')
+        ],
+        coerce=int,
+        description='genre',
+        render_kw={
+            'class': "form-control"
+        }
+    )
 
+    def __init__(self, *args, **kwargs):
+        super(BlackForm, self).__init__(*args, **kwargs)
+        self.user_id.choices = [(v.id, v.name) for v in User.query.all()]
+
+    submit = SubmitField(
+        label='submit',
+        render_kw={
+            'class': "btn btn-primary"
+        }
+    )
 
 class FilmForm(FlaskForm):
-    title = StringField(
+    name = StringField(
         label='name',
         validators=[
             DataRequired('please input name!')
@@ -77,7 +118,7 @@ class FilmForm(FlaskForm):
             'placeholder': "please input name!"
         }
     )
-    info = TextAreaField(
+    description = TextAreaField(
         label='description',
         validators=[
             DataRequired('please input description!')
@@ -95,14 +136,14 @@ class FilmForm(FlaskForm):
         ],
         description='logo',
     )
-    score = SelectField(
-        label='score',
+    star = SelectField(
+        label='star',
         validators=[
             DataRequired('please select star！')
         ],
         description='star',
         coerce=int,
-        choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')],
+        choices=[(0, '0 star'), (1, '1 star'), (2, '2 star'), (3, '3 star'), (4, '4 star'), (5, '5 star')],
         render_kw={
             'class': "form-control"
         }
@@ -113,8 +154,18 @@ class FilmForm(FlaskForm):
             DataRequired('please select genre！')
         ],
         coerce=int,
-        # choices=[(tag.id, tag.name) for tag in Tag.query.all()],
         description='genre',
+        render_kw={
+            'class': "form-control"
+        }
+    )
+    director_id = SelectField(
+        label='director',
+        validators=[
+            DataRequired('please select director！')
+        ],
+        coerce=int,
+        description='director',
         render_kw={
             'class': "form-control"
         }
@@ -123,8 +174,9 @@ class FilmForm(FlaskForm):
     def __init__(self, *args, **kwargs):
         super(FilmForm, self).__init__(*args, **kwargs)
         self.genre_id.choices = [(v.id, v.name) for v in Genre.query.all()]
+        self.director_id.choices=[(v.id, v.name) for v in Director.query.all()]
 
-    length = StringField(
+    release_length = StringField(
         label='release length',
         validators=[
             DataRequired('please input release length!')
@@ -135,7 +187,7 @@ class FilmForm(FlaskForm):
             'placeholder': "please input release length!",
         }
     )
-    release_time = StringField(
+    release_time = DateField(
         label='release time',
         validators=[
             DataRequired('please select release time!')
