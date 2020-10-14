@@ -9,3 +9,6 @@ In this week, we prepare project proposal and discussed related information, fin
 
 week3:
 Created the project proposal. Continued to prepare the users' stories.
+
+week4:
+write basic parts and completed the Update details page.
