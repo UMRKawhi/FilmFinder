@@ -18,7 +18,7 @@ CREATE TABLE `admin`  (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES (1, 'admin', 'admin', '2020-10-11 10:23:41');
+INSERT INTO `admin` VALUES (1, 'admin', 'pbkdf2:sha256:150000$S1e59BcO$dc45f4154319be0988bce039bf0cc869eaf44fb03e5c954d257215c002b84edb', '2020-10-06 10:23:41');
 
 -- ----------------------------
 -- Table structure for adminlog
@@ -85,9 +85,9 @@ CREATE TABLE `comment`  (
 -- ----------------------------
 -- Records of comment
 -- ----------------------------
-INSERT INTO `comment` VALUES (1, '123', 3, 1, '2020-10-11 16:00:17', 0);
-INSERT INTO `comment` VALUES (2, '456', 3, 1, '2020-10-11 11:56:46', 5);
-INSERT INTO `comment` VALUES (3, '789', 3, 1, '2020-10-11 12:44:34', 5);
+INSERT INTO `comment` VALUES (1, '123', 3, 1, '2020-10-06 16:00:17', 0);
+INSERT INTO `comment` VALUES (2, '456', 3, 1, '2020-10-07 11:56:46', 5);
+INSERT INTO `comment` VALUES (3, '789', 3, 1, '2020-10-07 12:44:34', 5);
 
 -- ----------------------------
 -- Table structure for direct
@@ -109,8 +109,8 @@ CREATE TABLE `direct`  (
 -- ----------------------------
 -- Records of direct
 -- ----------------------------
-INSERT INTO `direct` VALUES (1, NULL, 1, '2020-10-11 14:26:16');
-INSERT INTO `direct` VALUES (2, 3, 1, '2020-10-11 14:35:36');
+INSERT INTO `direct` VALUES (1, NULL, 1, '2020-10-06 14:26:16');
+INSERT INTO `direct` VALUES (2, 3, 1, '2020-10-06 14:35:36');
 
 -- ----------------------------
 -- Table structure for director
@@ -131,11 +131,11 @@ CREATE TABLE `director`  (
 -- ----------------------------
 -- Records of director
 -- ----------------------------
-INSERT INTO `director` VALUES (1, NULL, NULL, NULL, NULL, NULL, 'Steven Spielberg', '2020-10-11 11:22:38');
-INSERT INTO `director` VALUES (2, NULL, NULL, NULL, NULL, NULL, 'Martin Scorsese', '2020-10-11 11:22:41');
-INSERT INTO `director` VALUES (3, NULL, NULL, NULL, NULL, NULL, 'Quentin Tarantino', '2020-10-11 11:22:43');
-INSERT INTO `director` VALUES (4, NULL, NULL, NULL, NULL, NULL, 'Ridley Scott', '2020-10-11 11:22:45');
-INSERT INTO `director` VALUES (5, NULL, NULL, NULL, NULL, NULL, 'James Cameron', '2020-10-11 11:22:48');
+INSERT INTO `director` VALUES (1, NULL, NULL, NULL, NULL, NULL, 'Steven Spielberg', '2020-10-06 11:22:38');
+INSERT INTO `director` VALUES (2, NULL, NULL, NULL, NULL, NULL, 'Martin Scorsese', '2020-10-06 11:22:41');
+INSERT INTO `director` VALUES (3, NULL, NULL, NULL, NULL, NULL, 'Quentin Tarantino', '2020-10-06 11:22:43');
+INSERT INTO `director` VALUES (4, NULL, NULL, NULL, NULL, NULL, 'Ridley Scott', '2020-10-06 11:22:45');
+INSERT INTO `director` VALUES (5, NULL, NULL, NULL, NULL, NULL, 'James Cameron', '2020-10-06 11:22:48');
 
 -- ----------------------------
 -- Table structure for film
@@ -161,7 +161,7 @@ CREATE TABLE `film`  (
 -- ----------------------------
 -- Records of film
 -- ----------------------------
-INSERT INTO `film` VALUES (3, 'The Lost World: Jurassic Park', 'The Lost World: Jurassic Park is a 1997 American science fiction adventure film and the second installment in the Jurassic Park film series. A sequel to 1993\'s Jurassic Park and loosely based on Michael Crichton\'s 1995 novel The Lost World, the film was directed by Steven Spielberg and written by David Koepp. The film stars Jeff Goldblum, returning as the eccentric chaos theorist and mathematician Ian Malcolm, as well as Julianne Moore, Pete Postlethwaite, Arliss Howard, Vince Vaughn, and Vanessa Lee Chester. Four years after the disaster at Jurassic Park, John Hammond (Richard Attenborough) sends a team, led by Malcolm, to Isla Sorna, the second island Hammond\'s company InGen used to make the dinosaurs, to study the animals while coming into conflict with a team led by InGen to bring some of the dinosaurs back to the United States.\r\n\r\nAfter the original novel\'s release and the first film\'s success, fans pressured Crichton for a sequel. Following the book\'s publication in 1995, production began on a film sequel. Filming took place from September to December 1996, primarily in California, with a shoot in Kauai, Hawaii, where the first film was shot. The Lost World\'s plot and imagery is substantially darker than Jurassic Park. It makes more extensive use of computer-generated imagery to depict the dinosaurs, along with life-sized animatronics.\r\n\r\nReleased on May 23, 1997, the film received mixed reviews from critics, who praised the visuals and action sequences, but criticized the writing, and character development. The film was a box office success, grossing over $618 million worldwide, becoming the second-highest-grossing film of 1997. It earned an Academy Award nomination for Best Visual Effects. A sequel, Jurassic Park III, was released on July 18, 2001.', '20201006143536afefcd5eb58043d2adc9b97c18596787.jpg', 3, 107, 3, '2020-10-25', '128', '2020-10-11 14:35:36');
+INSERT INTO `film` VALUES (3, 'The Lost World: Jurassic Park', 'The Lost World: Jurassic Park is a 1997 American science fiction adventure film and the second installment in the Jurassic Park film series. A sequel to 1993\'s Jurassic Park and loosely based on Michael Crichton\'s 1995 novel The Lost World, the film was directed by Steven Spielberg and written by David Koepp. The film stars Jeff Goldblum, returning as the eccentric chaos theorist and mathematician Ian Malcolm, as well as Julianne Moore, Pete Postlethwaite, Arliss Howard, Vince Vaughn, and Vanessa Lee Chester. Four years after the disaster at Jurassic Park, John Hammond (Richard Attenborough) sends a team, led by Malcolm, to Isla Sorna, the second island Hammond\'s company InGen used to make the dinosaurs, to study the animals while coming into conflict with a team led by InGen to bring some of the dinosaurs back to the United States.\r\n\r\nAfter the original novel\'s release and the first film\'s success, fans pressured Crichton for a sequel. Following the book\'s publication in 1995, production began on a film sequel. Filming took place from September to December 1996, primarily in California, with a shoot in Kauai, Hawaii, where the first film was shot. The Lost World\'s plot and imagery is substantially darker than Jurassic Park. It makes more extensive use of computer-generated imagery to depict the dinosaurs, along with life-sized animatronics.\r\n\r\nReleased on May 23, 1997, the film received mixed reviews from critics, who praised the visuals and action sequences, but criticized the writing, and character development. The film was a box office success, grossing over $618 million worldwide, becoming the second-highest-grossing film of 1997. It earned an Academy Award nomination for Best Visual Effects. A sequel, Jurassic Park III, was released on July 18, 2001.', '20201006143536afefcd5eb58043d2adc9b97c18596787.jpg', 3, 107, 3, '2020-10-25', '128', '2020-10-06 14:35:36');
 
 -- ----------------------------
 -- Table structure for genre
@@ -179,11 +179,11 @@ CREATE TABLE `genre`  (
 -- ----------------------------
 -- Records of genre
 -- ----------------------------
-INSERT INTO `genre` VALUES (1, 'science', '2020-10-11 10:52:14');
-INSERT INTO `genre` VALUES (2, 'horror', '2020-10-11 10:56:29');
-INSERT INTO `genre` VALUES (3, 'action', '2020-10-11 10:56:33');
-INSERT INTO `genre` VALUES (5, 'animation', '2020-10-11 10:56:46');
-INSERT INTO `genre` VALUES (6, 'music', '2020-10-11 10:56:54');
+INSERT INTO `genre` VALUES (1, 'science', '2020-10-06 10:52:14');
+INSERT INTO `genre` VALUES (2, 'horror', '2020-10-06 10:56:29');
+INSERT INTO `genre` VALUES (3, 'action', '2020-10-06 10:56:33');
+INSERT INTO `genre` VALUES (5, 'animation', '2020-10-06 10:56:46');
+INSERT INTO `genre` VALUES (6, 'music', '2020-10-06 10:56:54');
 
 -- ----------------------------
 -- Table structure for genretag
@@ -205,8 +205,8 @@ CREATE TABLE `genretag`  (
 -- ----------------------------
 -- Records of genretag
 -- ----------------------------
-INSERT INTO `genretag` VALUES (1, NULL, 1, '2020-10-11 14:26:16');
-INSERT INTO `genretag` VALUES (2, 3, 1, '2020-10-11 14:35:36');
+INSERT INTO `genretag` VALUES (1, NULL, 1, '2020-10-06 14:26:16');
+INSERT INTO `genretag` VALUES (2, 3, 1, '2020-10-06 14:35:36');
 
 -- ----------------------------
 -- Table structure for operatelog
@@ -262,4 +262,70 @@ CREATE TABLE `user`  (
   UNIQUE INDEX `face`(`face`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES (1, '123', '123', '123', 'pbkdf2:sha256:150000$7uAMm4BK$c55dad0013fd532843002b09daf6486e5c25898ec844085277e6b498a1f88f56', '123@123.com', '123', '20201007111229fcffcf8fdcc3404997a797084b9e0370.jpg', '2020-10-06 09:41:58');
+INSERT INTO `user` VALUES (2, 'admin', 'admin', 'admin', 'pbkdf2:sha256:150000$S1e59BcO$dc45f4154319be0988bce039bf0cc869eaf44fb03e5c954d257215c002b84edb', 'admin@admin.com', '1234', NULL, '2020-10-06 10:21:34');
 
+-- ----------------------------
+-- Table structure for userlog
+-- ----------------------------
+DROP TABLE IF EXISTS `userlog`;
+CREATE TABLE `userlog`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `ip` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `log_time` datetime(0) DEFAULT NULL,
+  `film_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `user_id`(`user_id`) USING BTREE,
+  INDEX `ix_userlog_log_time`(`log_time`) USING BTREE,
+  CONSTRAINT `userlog_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of userlog
+-- ----------------------------
+INSERT INTO `userlog` VALUES (1, 1, '127.0.0.1', '2020-10-06 09:51:14', 3);
+INSERT INTO `userlog` VALUES (2, 1, NULL, '2020-10-07 10:58:53', 3);
+INSERT INTO `userlog` VALUES (3, 1, '127.0.0.1', '2020-10-07 11:00:32', 3);
+INSERT INTO `userlog` VALUES (4, 1, '127.0.0.1', '2020-10-07 11:00:43', 3);
+INSERT INTO `userlog` VALUES (5, 1, '127.0.0.1', '2020-10-07 11:08:57', NULL);
+INSERT INTO `userlog` VALUES (6, 1, '127.0.0.1', '2020-10-07 11:45:32', 3);
+INSERT INTO `userlog` VALUES (7, 1, '127.0.0.1', '2020-10-07 11:52:27', 3);
+INSERT INTO `userlog` VALUES (8, 1, '127.0.0.1', '2020-10-07 11:56:38', 3);
+INSERT INTO `userlog` VALUES (9, 1, '127.0.0.1', '2020-10-07 11:56:46', 3);
+INSERT INTO `userlog` VALUES (10, 1, '127.0.0.1', '2020-10-07 11:56:46', 3);
+INSERT INTO `userlog` VALUES (11, 1, '127.0.0.1', '2020-10-07 11:56:59', 3);
+INSERT INTO `userlog` VALUES (12, 1, '127.0.0.1', '2020-10-07 12:30:09', 3);
+INSERT INTO `userlog` VALUES (13, 1, '127.0.0.1', '2020-10-07 12:30:49', 3);
+INSERT INTO `userlog` VALUES (14, 1, '127.0.0.1', '2020-10-07 12:43:14', 3);
+INSERT INTO `userlog` VALUES (15, 1, '127.0.0.1', '2020-10-07 12:43:26', 3);
+INSERT INTO `userlog` VALUES (16, 1, '127.0.0.1', '2020-10-07 12:43:55', 3);
+INSERT INTO `userlog` VALUES (17, 1, '127.0.0.1', '2020-10-07 12:44:02', 3);
+INSERT INTO `userlog` VALUES (18, 1, '127.0.0.1', '2020-10-07 12:44:29', 3);
+INSERT INTO `userlog` VALUES (19, 1, '127.0.0.1', '2020-10-07 12:44:34', 3);
+INSERT INTO `userlog` VALUES (20, 1, '127.0.0.1', '2020-10-07 12:44:35', 3);
+INSERT INTO `userlog` VALUES (21, 1, '127.0.0.1', '2020-10-07 12:58:11', 3);
+INSERT INTO `userlog` VALUES (22, 1, '127.0.0.1', '2020-10-07 13:16:34', 3);
+INSERT INTO `userlog` VALUES (23, 1, '127.0.0.1', '2020-10-07 13:16:48', 3);
+
+-- ----------------------------
+-- Table structure for wishlist
+-- ----------------------------
+DROP TABLE IF EXISTS `wishlist`;
+CREATE TABLE `wishlist`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `film_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `film_id`(`film_id`) USING BTREE,
+  INDEX `user_id`(`user_id`) USING BTREE,
+  INDEX `ix_wishlist_create_time`(`create_time`) USING BTREE,
+  CONSTRAINT `wishlist_ibfk_1` FOREIGN KEY (`film_id`) REFERENCES `film` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `wishlist_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+SET FOREIGN_KEY_CHECKS = 1;
