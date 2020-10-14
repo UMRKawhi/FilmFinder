@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField, FileField, SelectMultipleField, DateTimeField,DateField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField, FileField, SelectMultipleField, \
+    DateTimeField,DateField
 from wtforms.validators import DataRequired, ValidationError, EqualTo
 from FilmFinder.models import Admin, Genre, Director, User
 

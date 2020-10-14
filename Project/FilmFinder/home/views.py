@@ -6,7 +6,6 @@ from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
 import os
 from FilmFinder import db, app
-import uuid
 from functools import wraps
 
 

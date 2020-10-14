@@ -20,8 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b2eed39e-af3c-4584-b92b-2987b57ee292" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FilmFinder.sql" beforeDir="false" afterPath="$PROJECT_DIR$/FilmFinder.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FilmFinder/admin/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/FilmFinder/admin/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FilmFinder/admin/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/FilmFinder/admin/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FilmFinder/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/FilmFinder/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FilmFinder/home/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/FilmFinder/home/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FilmFinder/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/FilmFinder/home/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FilmFinder/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/FilmFinder/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FilmFinder/static/admin/bootstrap/css/.Rhistory" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FilmFinder/static/base/css/.Rhistory" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -330,6 +338,8 @@
       <workItem from="1602372331296" duration="10000" />
       <workItem from="1602372351613" duration="235000" />
       <workItem from="1602372627069" duration="59000" />
+      <workItem from="1602636528970" duration="125000" />
+      <workItem from="1602638270364" duration="356000" />
     </task>
     <servers />
   </component>
