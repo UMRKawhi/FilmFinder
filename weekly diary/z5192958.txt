@@ -20,4 +20,8 @@ Basically completed the construction of the database,
 and communicated with Kaisen Luo and Mingyan Yu to construct the database model. 
 Completed the basic parts of admin and home together with Ziwei Li.
 
+week5:
+In the fifth week we completed our first presentation. 
+After that, we held a group meeting to discuss Retrospective. 
+After submitting the Retrospective report, we will begin to implement the sprint2 function.
 
