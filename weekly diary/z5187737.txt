@@ -12,3 +12,6 @@ Write the proposal and coorporate with Yipeng Han for the user story and ui part
 
 Week4:
 Write some basic parts of admin and home page.
+
+Week5:
+Prepare for the first demo and discuss the retrospective after the demo.
