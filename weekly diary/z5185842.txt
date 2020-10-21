@@ -12,3 +12,6 @@ Created the project proposal. Continued to prepare the users' stories.
 
 week4:
 write basic parts and completed the Update details page.
+
+week5:
+Worked on frontend for applying projects and listing applied and followed projects with Mingyan Yu.
