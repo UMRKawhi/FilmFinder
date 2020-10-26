@@ -38,14 +38,21 @@
 <body>
 	<!-- header section start-->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="logo" href="#"><img src="{{ url_for('static', filename='images/logo.png') }}"></a>
+        <a class="logo" href="{{ url_for('home.index') }}"><img src="{{ url_for('static', filename='images/logo.png') }}"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             
         </div>
-         <div class="login_text"><a href="{{ url_for('home.login') }}">LOGIN HERE</a></div>
+        {% if user.get('login_user_id') %}
+            <div class="login_text"><a href="{{ url_for('home.logout') }}">LOGOUT</a></div>
+            <div class="login_text"><a href="{{ url_for('home.user') }}">USER</a></div>
+            {% else %}
+            <div class="login_text"><a href="{{ url_for('home.login') }}">LOGIN HERE</a></div>
+            <div class="login_text"><a href="{{ url_for('home.register') }}">REGISTER </a></div>
+        {% endif %} 
+
     </nav>
 	<!-- header section start-->
 	<!-- banner section start-->
@@ -56,7 +63,7 @@
 			    <input type="" class="email_bt" placeholder="keyword" name="" id="keyword">
 				<button class="subscribe_bt" ><a id="do_search">Search</a></button>
 		    </div>
-		    <<div class="box_main">
+		    <div class="box_main">
 		    	<label class="radio-inline there_text">
 		    		<input type="radio" name="type" id='type1' value="name" checked>name
 		    	</label>
@@ -66,10 +73,13 @@
 		    	<label class="radio-inline there_text">
 		    		<input type="radio" name="type" id='type3' value="genre">genre
 		    	</label>
+                <label class="radio-inline there_text">
+		    		<input type="radio" name="type" id='type4' value="director">director
+		    	</label>
 		    	
 		    </div>
-		    <p class="there_text">FilmFinder is a website for review movies</p>
-		    <div class="bt_main">
+		    <p class="there_text" style="font-size: 50px">FilmFinder is a website for review movies</p>
+		    <div class="bt_main" >
 		    	<div class="discover_bt"><a href="#">Discover More</a></div>
 		    </div>
 		</div>
