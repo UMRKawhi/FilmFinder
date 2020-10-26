@@ -46,11 +46,10 @@
             <form class="navbar-form navbar-left" role="search" style="margin-top:18px;">
                 <div class="form-group input-group">
                     <input type="text" class="form-control" placeholder="please input keyword！" id="keyword" value="{{ keyword }}"
-                           onkeydown="if(event.keyCode===13)return false;"
-                    >
+                           onkeydown="if(event.keyCode===13)return false;" >
 
                     <span class="input-group-btn">
-                       <select class="form-control">
+                       <select id="select_type" class="form-control">
                           <option>name</option>
                           <option>description</option>
                           <option>genre</option>
@@ -63,12 +62,17 @@
                 <li>
                     <a class="curlink" href="{{ url_for('home.index', page=1) }}"><span class="glyphicon glyphicon-film"></span>&nbsp;Film</a>
                 </li>
+
+                 {% if session['login_user_id'] %}
+                 {% else %}
                 <li>
                     <a class="curlink" href="{{ url_for('home.login') }}"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Login</a>
                 </li>
                 <li>
                     <a class="curlink" href="{{ url_for('home.register') }}"><span class="glyphicon glyphicon-plus"></span>&nbsp;Register</a>
                 </li>
+                {% endif %}
+
                 <li>
                     <a class="curlink" href="{{ url_for('home.logout') }}"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a>
                 </li>
@@ -124,7 +128,7 @@
     $(document).ready(function () {
         $("#do_search").click(function () {
             let keyword = $('#keyword').val();
-            let type = $('input:radio:checked').val();
+            let type = $('#select_type option:checked').val();
             location.href = "{{ url_for('home.search') }}?keyword=" + keyword+"&type="+type;
         });
     })
