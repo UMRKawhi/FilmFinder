@@ -54,7 +54,7 @@
                             </li>
                             <li class="user-footer">
                                 <div class="pull-right">
-                                    <a href="{{ url_for('admin.logout') }}" class="btn btn-default btn-flat">logout</a>
+                                    <a href="{{ url_for('admin.logout') }}" class="btn btn-default btn-flat">LOGOUT</a>
                                 </div>
                             </li>
                         </ul>
@@ -90,13 +90,13 @@
                 <li class="treeview" id="g-1">
                     <a href="#">
                         <i class="fa fa-home" aria-hidden="true"></i>
-                        <span>fist page</span>
+                        <span>First page</span>
                         <span class="label label-primary pull-right">1</span>
                     </a>
                     <ul class="treeview-menu">
                         <li id="g-1-1">
                             <a href="{{ url_for('admin.index') }}">
-                                <i class="fa fa-circle-o"></i> control panel
+                                <i class="fa fa-circle-o"></i> Control Panel
                             </a>
                         </li>
                     </ul>
@@ -110,12 +110,12 @@
                     <ul class="treeview-menu">
                         <li id="g-2-1">
                             <a href="{{ url_for('admin.genre_add') }}">
-                                <i class="fa fa-circle-o"></i> add genre
+                                <i class="fa fa-circle-o"></i> Add Genre
                             </a>
                         </li>
                         <li id="g-2-2">
                             <a href="{{ url_for('admin.genre_list', page=1) }}">
-                                <i class="fa fa-circle-o"></i> genre list
+                                <i class="fa fa-circle-o"></i> Genre List
                             </a>
                         </li>
                     </ul>
@@ -158,25 +158,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="treeview" id="g-5">
-                    <a href="#">
-                        <i class="fa fa-file-video-o" aria-hidden="true"></i>
-                        <span>Banned Management</span>
-                        <span class="label label-primary pull-right">2</span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li id="g-5-1">
-                            <a href="{{ url_for('admin.blacklist_add') }}">
-                                <i class="fa fa-circle-o"></i> Add Banner
-                            </a>
-                        </li>
-                        <li id="g-5-2">
-                            <a href="{{ url_for('admin.blacklist_list', page=1) }}">
-                                <i class="fa fa-circle-o"></i> Banned list
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+
 
 
             </ul>
