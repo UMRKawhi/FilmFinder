@@ -16,10 +16,10 @@
                         </a>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading">{{ film.name }}
+                        <h4 class="media-heading" style="font-size: 30px">{{ film.name }}
                             <a href="{{ url_for('home.detail',id=film.id,page=1) }}" class="label label-primary pull-right"><span class="glyphicon glyphicon-play"></span>film detail</a></h4>
 
-                        <h4 class="media-heading">star: {{ film.star }}</h4>
+                        <h4 class="media-heading" style="font-size: 30px">star: {{ film.star }}</h4>
                         <h4 class="media-heading">description: {{ film.description[0:100] }}</h4>
                     </div>
                 </div>
