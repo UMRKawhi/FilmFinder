@@ -25,3 +25,10 @@ In the fifth week we completed our first presentation.
 After that, we held a group meeting to discuss Retrospective. 
 After submitting the Retrospective report, we will begin to implement the sprint2 function.
 
+week6：
+A group meeting was held with the group members to discuss the tasks of jira sprint2, 
+determine the functions to be completed, and discuss the existing shortcomings.
+Modified the ORM model with Ziwei Li, and modified the admin page with Kaisen Luo and Mingyan Yu. 
+Modified admin's html file with three team members.
+
+
