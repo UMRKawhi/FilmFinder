@@ -1,7 +1,6 @@
 import datetime
 from . import db
 
-
 class User(db.Model):
     __tablename__ = 'user'
     # id
@@ -28,6 +27,8 @@ class User(db.Model):
     comments = db.relationship('Comment', backref='user')
     # wishlist constraints
     wishlist = db.relationship('WishList', backref='user')
+    # blacklist
+    blacklist = db.relationship('BlackList', backref='user')
     # check password
     def check_password(self, password):
         from werkzeug.security import check_password_hash
@@ -178,8 +179,6 @@ class Comment(db.Model):
     film_id = db.Column(db.Integer, db.ForeignKey('film.id'))
     # user id
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    # score
-    score = db.Column(db.Integer)
     # create time
     create_time = db.Column(db.DateTime, index=True, default=datetime.datetime.now)
     # score
@@ -258,7 +257,8 @@ class BlackList(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     # user id
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
+    # banner user
+    banner_id = db.Column(db.Integer, nullable=False)
     # create time
     create_time = db.Column(db.DateTime, index=True, default=datetime.datetime.now)
 
