@@ -17,19 +17,19 @@
         <div class="col-md-8" style="height:500px;">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><span class="glyphicon glyphicon-facetime-video"></span>&nbsp;film detail</h3>
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-facetime-video"></span>&nbsp;Film Detail</h3>
                 </div>
                 <div class="panel-body" style="height:459px;">
                     <table class="table">
                         <tr>
                             <td style="width:30%;color:#ccc;font-weight:bold;font-style:italic;">
-                                <span class="glyphicon glyphicon-film"></span>&nbsp;name
+                                <span class="glyphicon glyphicon-film"></span>&nbsp;Name
                             </td>
                             <td>{{ film.name }}</td>
                         </tr>
                         <tr>
                             <td style="color:#ccc;font-weight:bold;font-style:italic;">
-                                <span class="glyphicon glyphicon-tag"></span>&nbsp;genre
+                                <span class="glyphicon glyphicon-tag"></span>&nbsp;Genre
                             </td>
                             <td>
                                 {% for genre in genres %}
@@ -39,7 +39,7 @@
                         </tr>
                         <tr>
                             <td style="color:#ccc;font-weight:bold;font-style:italic;">
-                                <span class="glyphicon glyphicon-tag"></span>&nbsp;director
+                                <span class="glyphicon glyphicon-tag"></span>&nbsp;Director
                             </td>
                             <td>
                                 {% for director in directors %}
@@ -47,25 +47,16 @@
                                 {% endfor %}
                             </td>
                         </tr>
+
                         <tr>
                             <td style="color:#ccc;font-weight:bold;font-style:italic;">
-                                <span class="glyphicon glyphicon-tag"></span>&nbsp;cast
-                            </td>
-                            <td>
-                                {% for cast in casts %}
-                                    {{ cast.name }},
-                                {% endfor %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="color:#ccc;font-weight:bold;font-style:italic;">
-                                <span class="glyphicon glyphicon-time"></span>&nbsp;release length
+                                <span class="glyphicon glyphicon-time"></span>&nbsp;Release Length
                             </td>
                             <td>{{ film.release_length }} minutes</td>
                         </tr>
                         <tr>
                             <td style="color:#ccc;font-weight:bold;font-style:italic;">
-                                <span class="glyphicon glyphicon-star"></span>&nbsp;score
+                                <span class="glyphicon glyphicon-star"></span>&nbsp;Score
                             </td>
                             <td>
                                 <div>
@@ -80,28 +71,28 @@
                         </tr>
                         <tr>
                             <td style="color:#ccc;font-weight:bold;font-style:italic;">
-                                <span class="glyphicon glyphicon-calendar"></span>&nbsp;release time
+                                <span class="glyphicon glyphicon-calendar"></span>&nbsp;Release Time
                             </td>
                             <td>{{ film.release_time }}</td>
                         </tr>
                         <tr>
                             <td style="color:#ccc;font-weight:bold;font-style:italic;">
-                                <span class="glyphicon glyphicon-play"></span>&nbsp;play num
+                                <span class="glyphicon glyphicon-play"></span>&nbsp;Play Num
                             </td>
                             <td>{{ film.play_num }}</td>
                         </tr>
                         <tr>
                             <td style="color:#ccc;font-weight:bold;font-style:italic;">
-                                <span class="glyphicon glyphicon-comment"></span>&nbsp;comments
+                                <span class="glyphicon glyphicon-comment"></span>&nbsp;Comments
                             </td>
                             <td>{{ film.comment_num }}</td>
                         </tr>
                         <tr>
                             <td style="color:#ccc;font-weight:bold;font-style:italic;">
-                                <span class="glyphicon glyphicon-picture"></span>&nbsp;description
+                                <span class="glyphicon glyphicon-tag"></span>&nbsp;Description
                             </td>
                             <td>
-                                {{ film.description }}
+                                {{ film.description[0:350] }}
                             </td>
                         </tr>
                     </table>
@@ -111,7 +102,7 @@
         <div class="col-md-12" style="margin-top:6px;">
             <div class="panel panel-danger">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span>&nbsp;comments</h3>
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span>&nbsp;Comments</h3>
                 </div>
                 <div class="panel-body">
                     {% if 'login_user' not in session %}
@@ -120,7 +111,7 @@
                                 <span aria-hidden="true">×</span>
                                 <span class="sr-only">Close</span>
                             </button>
-                            <strong>please<a href="{{ url_for('home.login') }}" class="text-info">login</a></strong>
+                            <strong>Please <a href="{{ url_for('home.login') }}" class="text-info">Login</a></strong>
                         </div>
                     {% endif %}
                     {% include 'home/alert_info.html' %}
@@ -146,7 +137,7 @@
                         &nbsp;
                         {% if 'login_user' in session %}
                             <a class="btn btn-danger" id="btn-col">
-                                <span class="glyphicon glyphicon-heart"></span>&nbsp;wishlist
+                                <span class="glyphicon glyphicon-heart"></span>&nbsp;WishList
                             </a>
                             <span id="show_collect_msg"></span>
                         {% endif %}
@@ -166,13 +157,25 @@
                                 <div class="comment-main">
                                     <header class="comment-header">
                                         <div class="comment-meta">
-                                            <a class="comment-author" href="{{ url_for('home.user') }}">{{ comment.user.name }}</a>
+                                            <a class="comment-author" href="{{ url_for('home.watch_wishlist', user_id=comment.user.id, page=1) }}">{{ comment.user.name }}</a>
                                             comment on
-                                            <time title="{{ comment.add_time }}" datetime="{{ comment.add_time }}">{{ comment.add_time }}</time>
+                                            <time title="{{ comment.create_time }}" datetime="{{ comment.create_time }}">{{ comment.create_time }}</time>
+                                            <a href="{{ url_for('home.add_banner',banner_id=comment.user.id, film_id = film.id) }}" class="label label-primary pull-right"><span class="glyphicon glyphicon-play"></span>Add banner</a>
                                         </div>
                                     </header>
                                     <div class="comment-body">
                                         <p>{{ comment.content }}</p>
+                                        <p>
+                                            <div>
+                                            {% for i in range(comment.score) %}
+                                                <span class="glyphicon glyphicon-star" style="color:#FFD119"></span>
+                                            {% endfor %}
+                                            {% for i in range(5 - comment.score) %}
+                                                <span class="glyphicon glyphicon-star-empty" style="color:#FFD119"></span>
+                                            {% endfor %}
+                                            </div>
+
+                                        <p>
                                     </div>
                                 </div>
                             </li>
@@ -226,7 +229,7 @@
         <div class="col-md-12" style="margin-top:6px;">
             <div class="panel panel-danger">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span>&nbsp;recommendations
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span>&nbsp;Recommendations
                     <a  id='genre'  class="label label-primary pull-right"><span class="glyphicon glyphicon-heart"></span>Genre</a>
                         <a id='director'  class="label label-primary pull-right"><span class="glyphicon glyphicon-heart"></span>Director</a>
                     </h3>
@@ -241,7 +244,7 @@
                             </div>
                             <div class="media-body">
                                 <h4 class="media-heading">{{ film.name }}
-                                    <a href="{{ url_for('home.detail',id=film.id,page=1) }}" class="label label-primary pull-right"><span class="glyphicon glyphicon-play"></span>film detail</a></h4>
+                                    <a href="{{ url_for('home.detail',id=film.id,page=1) }}" class="label label-primary pull-right"><span class="glyphicon glyphicon-play"></span>Film detail</a></h4>
 
                                 <h4 class="media-heading">star: {{ film.star }}</h4>
                                 <h4 class="media-heading">description: {{ film.description[0:100] }}</h4>
@@ -327,13 +330,18 @@
                 }
             })
         });
-        $("#genre").click(function (){
+    });
+    $(document).ready(function () {
+         $("#genre").click(function (){
             location.href = "{{ url_for('home.detail',id=film.id,page=1) }}?recommendation=genre";
         });
-        $("#director").click(function (){
+    });
+     $(document).ready(function () {
+         $("#director").click(function (){
             location.href = "{{ url_for('home.detail',id=film.id,page=1) }}?recommendation=director";
         });
     });
+
 </script>
 
 {% endblock %}
