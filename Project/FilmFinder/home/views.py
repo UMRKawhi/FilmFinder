@@ -1,11 +1,13 @@
+from sqlalchemy.sql import func
 from . import home
-from flask import render_template, redirect, url_for, flash, session, request
+from flask import render_template, redirect, url_for, flash, session, request,g
 from .forms import RegisterForm, LoginFrom, UserDetailForm, CommentForm
 from FilmFinder.models import User, UserLog, Film, WishList, Comment, Genre, BlackList, GenreTag, Director, Cast, Direct
 from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
 import os
 from FilmFinder import db, app
+import uuid
 from functools import wraps
 
 
@@ -20,7 +22,13 @@ def user_login_require(func):
 
 @home.route("/")
 def index():
-    return render_template("home/index.html")
+    login_user = session.get('login_user')
+    login_user_id = session.get('login_user_id')
+    user={
+        'login_user':login_user,
+        'login_user_id':login_user_id
+    }
+    return render_template("home/index.html", user=user)
 
 
 @home.route("/<int:page>/")
@@ -213,28 +221,57 @@ def wishlist(page):
     ).paginate(page=page, per_page=10)
     return render_template('home/wishlist.html', page_wishlists=page_wishlists)
 
+@home.route('/wishlist/watch/<int:user_id>/<int:page>')
+def watch_wishlist(user_id=None, page=None):
+    if not page:
+        page = 1
+    wishlists = WishList.query.filter(WishList.user_id == user_id).all()
+    wishs = []
+    for wish in wishlists:
+        wishs.append(wish.film_id)
+
+    page_wishlists = Film.query.join(WishList).filter(
+        Film.id.in_(wishs)
+    ).paginate(page=page, per_page=10)
+    return render_template('home/watch_wishlist.html', page_wishlists=page_wishlists, user_id=user_id, page=page)
+
+
 @home.route("/wishlist/delete/<int:delete_id>")
 @user_login_require
 def wishlist_delete(delete_id=None):
-    print(delete_id)
     user_id = session['login_user_id']
-    wishlist = WishList.query.filter(WishList.film_id==delete_id, WishList.user_id==user_id).first_or_404()
-    print(wishlist)
+    wishlist = WishList.query.filter(WishList.film_id==delete_id, WishList.user_id==int(user_id)).first_or_404()
     db.session.delete(wishlist)
     db.session.commit()
     flash('delete success！', category='ok')
     return redirect(url_for('home.wishlist', page=1))
+
+@home.route("/comments/delete/<int:delete_id>")
+@user_login_require
+def comments_delete(delete_id=None):
+    user_id = session['login_user_id']
+    wishlist = Comment.query.filter(Comment.id==delete_id, Comment.user_id==user_id).first_or_404()
+    db.session.delete(wishlist)
+    db.session.commit()
+    flash('delete success！', category='ok')
+    return redirect(url_for('home.comments', page=1))
+
 
 @home.route('/blacklist/<int:page>/')
 @user_login_require
 def blacklist(page):
     if not page:
         page = 1
-    page_blacklists = BlackList.query.filter_by(
+    blacklists = BlackList.query.filter_by(
         user_id=int(session['login_user_id'])
-    ).order_by(
-        BlackList.create_time.desc()
+    ).all()
+    banners = []
+    for black in blacklists:
+        banners.append(black.banner_id)
+    page_blacklists = User.query.filter(
+        User.id.in_(banners)
     ).paginate(page=page, per_page=10)
+    print(page_blacklists)
     return render_template('home/blacklist.html', page_blacklists=page_blacklists)
 
 
@@ -243,27 +280,40 @@ def search():
     keyword = request.args.get('keyword')
     data_type = request.args.get('type')
     search_films = Film.query.filter(
-        Film.name.ilike("%" + keyword + "%")
+        Film.name.ilike("%" + keyword + "%"),
     ).order_by(
-        Film.create_time.desc()
+        Film.star.desc(),
+        Film.name.desc()
     )
     search_count = Film.query.filter(Film.name.ilike("%" + keyword + "%")).count()
     if data_type == 'description':
-        search_movies = Film.query.filter(
+        search_films = Film.query.filter(
             Film.description.ilike("%" + keyword + "%")
         ).order_by(
-            Film.create_time.desc()
+            Film.star.desc(),
+            Film.name.desc()
         )
-        search_count = Film.query.filter(Film.description.ilike("%" + keyword + "%")).count()
+        search_count = search_films.count()
     if data_type == 'genre':
-        search_movies = Film.query.join(GenreTag).join(Genre).filter(
+        search_films = Film.query.join(GenreTag).join(Genre).filter(
             Film.id ==GenreTag.film_id,
             GenreTag.genre_id == Genre.id,
             Genre.name.ilike("%" + keyword + "%")
         ).order_by(
-            Film.create_time.desc()
+            Film.star.desc(),
+            Film.name.desc()
         )
-        search_count = search_movies.count()
+        search_count = search_films.count()
+    if data_type =='director':
+        search_films = Film.query.join(Direct).join(Director).filter(
+            Film.id == Direct.film_id,
+            Direct.director_id == Director.id,
+            Director.name.ilike("%" + keyword + "%")
+        ).order_by(
+            Film.star.desc(),
+            Film.name.desc()
+        )
+        search_count = search_films.count()
     return render_template('home/search.html', keyword=keyword, search_films=search_films, search_count=search_count)
 
 
@@ -303,15 +353,65 @@ def detail(id=None,page=None):
         Film.star.desc()
     ).paginate(page=page, per_page=10)
     last_film_id = None
+
+    page_comments = Comment.query.filter(
+                Comment.film_id == id
+            ).order_by(
+                Comment.create_time.desc()
+            ).paginate(page=page, per_page=10)
     if 'login_user' in session:
         user_id = session['login_user_id']
+        blacklists = BlackList.query.filter(Comment.user_id == user_id).all()
+        banners = []
+        for black in blacklists:
+            banners.append(black.user_id)
+        page_comments = Comment.query.join(
+                    Film
+                ).join(
+                    User
+                ).filter(
+                    Film.id == film.id,
+                    User.id == Comment.user_id,
+                    User.id.notin_(banners)
+                ).order_by(
+                    Comment.create_time.desc()
+                ).paginate(page=page, per_page=10)
+        temp_comments = Comment.query.join(
+            Film
+        ).join(
+            User
+        ).filter(
+            Film.id == film.id,
+            User.id == Comment.user_id,
+            User.id.notin_(banners)
+        ).all()
+        score = 0
+        num = 0
+        for temp in temp_comments:
+            score = score + temp.score
+            num = num + 1
+        if num == 0:
+            film.star = 0
+        else:
+            film.star = score / num
 
-        userlog = UserLog.query.filter(UserLog.user_id==user_id, UserLog.film_id is not None).order_by(UserLog.log_time.desc()).first_or_404()
-        if userlog:
-            last_film_id = userlog.film_id
-            last_film = Film.query.filter(Film.id == last_film_id).first()
+        comment_history = Comment.query.filter(Comment.user_id == user_id).order_by(Comment.score.desc(), Comment.create_time.desc()).limit(10).all()
+        if comment_history:
+            score_greater = []
+            score_middle = []
+            for comment in comment_history:
+                if comment.score >= 4:
+                    score_greater.append(comment.film_id)
+                if comment.score == 3:
+                    score_middle.append(comment.film_id)
+            common_films = Film.query.filter(Film.id.in_(score_greater)).all()
+            print(common_films)
             if recommendation == 'genre':
-                genre_list = [g.genre_id for g in last_film.genre]
+                genre_list = []
+                for cf in common_films:
+                    for g in cf.genre:
+                        genre_list.append(g.genre_id)
+                genre_list.extend([g.genre_id for g in film.genre])
                 page_recommendations = Film.query.join(GenreTag).filter(
                     Film.id == GenreTag.film_id,
                     GenreTag.genre_id.in_(genre_list)
@@ -319,7 +419,11 @@ def detail(id=None,page=None):
                     Film.star.desc()
                 ).paginate(page=page, per_page=10)
             if recommendation == 'director':
-                director_list = [d.director_id for d in last_film.director]
+                director_list = []
+                for cf in common_films:
+                    for d in cf.director:
+                        director_list.append(d.director_id)
+                director_list.extend([d.director_id for d in film.director])
                 page_recommendations = Film.query.join(Direct).filter(
                     Film.id == Direct.film_id,
                     Direct.director_id.in_(director_list)
@@ -339,15 +443,13 @@ def detail(id=None,page=None):
             score=data['star'],
             user_id=session['login_user_id']
         )
-        bannered = BlackList.query.filter(user_id==session['login_user_id']).first()
-        if not bannered:
-            ratings = Comment.query.filter(Comment.film_id==film.id).all()
-            num = 1
-            sum = data['star']
-            for rate in ratings:
-                num = num + 1
-                sum += rate.score
-            film.star = sum / num
+        ratings = Comment.query.filter(Comment.film_id == film.id).all()
+        num = 1
+        sum = data['star']
+        for rate in ratings:
+            num = num + 1
+            sum += rate.score
+        film.star = sum / num
         db.session.add(comment)
         film.comment_num += 1
         db.session.commit()
@@ -356,21 +458,7 @@ def detail(id=None,page=None):
 
     if page is None:
         page = 1
-    blacklists = BlackList.query.all()
-    banners = []
-    for black in blacklists:
-        banners.append(black.user_id)
-    page_comments = Comment.query.join(
-        Film
-    ).join(
-        User
-    ).filter(
-        Film.id == film.id,
-        User.id == Comment.user_id,
-        User.id.notin_(banners)
-    ).order_by(
-        Comment.create_time.desc()
-    ).paginate(page=page, per_page=10)
+
     print("success")
 
     return render_template('home/detail.html', film=film,genres=genres, directors=directors, casts=casts, form=form, page_comments=page_comments, page_recommendations=page_recommendations, last_film_id=last_film_id)
@@ -379,7 +467,6 @@ def detail(id=None,page=None):
 @home.route('/wishlist/add/')
 @user_login_require
 def add_wishlist():
-    print("success")
     film_id = request.args.get('film_id', '')
     user_id = request.args.get('user_id', '')
     wishlist = WishList.query.filter_by(
@@ -399,6 +486,29 @@ def add_wishlist():
     import json
     return json.dumps(data)
 
+@home.route('/banner/add/<int:film_id>/<int:banner_id>')
+@user_login_require
+def add_banner(banner_id=None, film_id=None):
+    if banner_id:
+        user_id = session.get('login_user_id')
+        blacklist = BlackList(
+            user_id=user_id,
+            banner_id = banner_id
+        )
+        db.session.add(blacklist)
+        db.session.commit()
+        return redirect(url_for('home.detail', id=film_id, page = 1) )
+    return redirect(url_for('home.detail', id=film_id, page = 1))
 
+@home.route("/banner/delete/<int:banner_id>/")
+@user_login_require
+def delete_banner(banner_id=None):
+    user_id = session.get('login_user_id')
+    banner = BlackList.query.filter(
+        user_id==int(user_id),
+        banner_id == banner_id
+    ).first_or_404()
+    db.session.delete(banner)
+    db.session.commit()
 
-
+    return redirect(url_for('home.blacklist', page=1))
