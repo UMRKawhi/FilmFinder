@@ -512,3 +512,6 @@ def delete_banner(banner_id=None):
     db.session.commit()
 
     return redirect(url_for('home.blacklist', page=1))
+
+
+

@@ -4,6 +4,8 @@ from wtforms.validators import DataRequired, ValidationError, EqualTo
 from FilmFinder.models import User
 
 
+
+
 class RegisterForm(FlaskForm):
     name = StringField(
         label='nick name',
@@ -128,7 +130,7 @@ class LoginFrom(FlaskForm):
         validators=[
             DataRequired('please input name!')
         ],
-        description='name',
+
         render_kw={
             'class': "form-control input-lg",
             'placeholder': "please input name!",
@@ -141,7 +143,6 @@ class LoginFrom(FlaskForm):
         validators=[
             DataRequired('please input password！')
         ],
-        description='password',
         render_kw={
             'class': "form-control input-lg",
             'placeholder': "please input password！",
