@@ -8,6 +8,7 @@ Group Members:
 + Mingyan Yu z5196418
 + Kaisen Luo z5185842
 # How to Use？
+** For running this project, please check the final report **
 This project is based on Python3 framework, using bootstrap and flask to build the front-end and back-end. For Database, we select Mysql(version 5.7). The Database GUI is Navicat, which can run the SQL script and can improve the efficiency. The required library are:
 + click==7.1.2
 + Flask==1.1.2
