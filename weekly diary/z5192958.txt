@@ -31,4 +31,7 @@ determine the functions to be completed, and discuss the existing shortcomings.
 Modified the ORM model with Ziwei Li, and modified the admin page with Kaisen Luo and Mingyan Yu. 
 Modified admin's html file with three team members.
 
+week7:
+
+
 
