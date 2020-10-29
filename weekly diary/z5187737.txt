@@ -15,3 +15,6 @@ Write some basic parts of admin and home page.
 
 Week5:
 Prepare for the first demo and discuss the retrospective after the demo.
+
+Week6:
+Modified the ORM model and the admin's html. Discuss the existing weakness.
