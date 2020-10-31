@@ -1,0 +1,17 @@
+COMP9900 H18A-ChongChongChong
+Ziwei Li z5187737
+
+Week1:
+Complete forming the team. Discuss with the team members and decide the project topic.
+
+Week2:
+Joined the Jira and GitHub group. Worked on the proposal and discuss the architecture of the FilmFinder. 
+
+Week3:
+Write the proposal and coorporate with Yipeng Han for the user story and ui part.
+
+Week4:
+Write some basic parts of admin and home page.
+
+Week5:
+Prepare for the first demo and discuss the retrospective after the demo.

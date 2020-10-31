@@ -1,0 +1,17 @@
+COMP9900 H18A-ChongChongChong
+Kaisen Luo z5185842
+ 
+week1:
+We Completed the team and determine the topic chongchongchong, chosed the project and discussed with team members to creat project thinking and structure.
+
+week2:
+In this week, we prepare project proposal and discussed related information, finished some draft of projects.
+
+week3:
+Created the project proposal. Continued to prepare the users' stories.
+
+week4:
+write basic parts and completed the Update details page.
+
+week5:
+Worked on frontend for applying projects and listing applied and followed projects with Mingyan Yu.

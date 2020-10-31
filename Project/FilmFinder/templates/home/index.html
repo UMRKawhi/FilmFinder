@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- mobile metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<!-- site metas -->
+<title>FilmFinder</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/icommon.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/meanmenu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.mCustomScrollbar.concat.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.mCustomScrollbar.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.fancybox.min.css') }}" media="screen">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/slick.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/fevicon.png') }}" type="image/gif">
+
+
+</head>
+<body>
+	<!-- header section start-->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="logo" href="{{ url_for('home.index') }}"><img src="{{ url_for('static', filename='images/logo.png') }}"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            
+        </div>
+        {% if user.get('login_user_id') %}
+            <div class="login_text"><a href="{{ url_for('home.logout') }}">LOGOUT</a></div>
+            <div class="login_text"><a href="{{ url_for('home.user') }}">USER</a></div>
+            {% else %}
+            <div class="login_text"><a href="{{ url_for('home.login') }}">LOGIN HERE</a></div>
+            <div class="login_text"><a href="{{ url_for('home.register') }}">REGISTER </a></div>
+        {% endif %} 
+
+    </nav>
+	<!-- header section start-->
+	<!-- banner section start-->
+	<div class="banner_section layout_padding">
+		<div class="container">
+			<h1 class="best_taital">FilmFinder</h1>
+			<div class="box_main_2">
+			    <input type="" class="email_bt" placeholder="keyword" name="" id="keyword">
+				<button class="subscribe_bt" ><a id="do_search">Search</a></button>
+		    </div>
+		    <div class="box_main">
+		    	<label class="radio-inline there_text">
+		    		<input type="radio" name="type" id='type1' value="name" checked>name
+		    	</label>
+		    	<label class="radio-inline there_text">
+		    		<input type="radio" name="type" id='type2' value="description">description
+		    	</label>
+		    	<label class="radio-inline there_text">
+		    		<input type="radio" name="type" id='type3' value="genre">genre
+		    	</label>
+                <label class="radio-inline there_text">
+		    		<input type="radio" name="type" id='type4' value="director">director
+		    	</label>
+		    	
+		    </div>
+		    <p class="there_text" style="font-size: 50px">FilmFinder is a website for review movies</p>
+		    <div class="bt_main" >
+		    	<div class="discover_bt"><a href="#">Discover More</a></div>
+		    </div>
+		</div>
+	</div>
+	<!-- banner section end-->
+	
+
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery-3.0.0.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugin.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/owl.carousel.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.fancybox.min.js') }}"></script>
+<script src="//cdn.bootcss.com/holder/2.9.4/holder.min.js"></script>
+      <script>
+      $(document).ready(function() {
+          $(".fancybox").fancybox({
+              openEffect: "none",
+              closeEffect: "none"
+          });
+      })
+      </script>
+<script>
+    $(document).ready(function () {
+        $("#do_search").click(function () {
+            let keyword = $('#keyword').val();
+            let type = $('input:radio:checked').val();
+            location.href = "{{ url_for('home.search') }}?keyword=" + keyword+"&type="+type;
+        });
+    })
+
+</script>
+
+     
+</body>
+</html>
