@@ -1,5 +1,6 @@
 import os
 
+# database type + protocol
 SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:root@127.0.0.1:3306/film'
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 SECRET_KEY = 'b1b7ed6af47d4031acbdeb420658ba84'
