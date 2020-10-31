@@ -28,4 +28,4 @@ This project is based on Python3 framework, using bootstrap and flask to build t
 + Python(3.6) - the skleton of the project
 + Mysql(5.7.30) - an open source relationship database
 + Navicat - a database GUI for running SQL script
-+ AWS EC2 - An virtual computer for cloud database(TODO)
++ AWS EC2 - An virtual computer for cloud database
