@@ -4,8 +4,6 @@ from wtforms.validators import DataRequired, ValidationError, EqualTo
 from FilmFinder.models import User
 
 
-
-
 class RegisterForm(FlaskForm):
     name = StringField(
         label='nick name',
@@ -227,7 +225,6 @@ class CommentForm(FlaskForm):
         ],
         description='content',
         render_kw={
-            # 'id': "input_content"
             'class': "form-control",
             'rows': "5"
         }
