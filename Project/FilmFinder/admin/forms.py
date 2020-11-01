@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField, FileField, SelectMultipleField, \
-    DateTimeField,DateField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField, FileField, SelectMultipleField
+from wtforms import DateTimeField, DateField
 from wtforms.validators import DataRequired, ValidationError, EqualTo
 from FilmFinder.models import Admin, Genre, Director, User
 
@@ -64,6 +64,8 @@ class GenreForm(FlaskForm):
             'class': "btn btn-primary"
         }
     )
+
+
 class DirectorForm(FlaskForm):
     name = StringField(
         label='director',
@@ -83,6 +85,8 @@ class DirectorForm(FlaskForm):
             'class': "btn btn-primary"
         }
     )
+
+
 class BlackForm(FlaskForm):
     user_id = SelectField(
         label='genre',
@@ -106,6 +110,7 @@ class BlackForm(FlaskForm):
             'class': "btn btn-primary"
         }
     )
+
 
 class FilmForm(FlaskForm):
     name = StringField(
@@ -139,9 +144,6 @@ class FilmForm(FlaskForm):
     )
     star = SelectField(
         label='star',
-        validators=[
-            DataRequired('please select star！')
-        ],
         description='star',
         coerce=int,
         choices=[(0, '0 star'), (1, '1 star'), (2, '2 star'), (3, '3 star'), (4, '4 star'), (5, '5 star')],
