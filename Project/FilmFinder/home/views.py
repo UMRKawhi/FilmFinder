@@ -1,4 +1,11 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+# @Time   : 2020/10/1 12:50
+from flask import render_template
 from sqlalchemy.sql import func
+
+from . import home
+
 from . import home
 from flask import render_template, redirect, url_for, flash, session, request,g
 from .forms import RegisterForm, LoginFrom, UserDetailForm, CommentForm
@@ -188,6 +195,7 @@ def user():
     return render_template('home/user.html', form=form, login_user=login_user)
 
 
+
 @home.route('/comments/<int:page>/')
 @user_login_require
 def comments(page):
@@ -199,6 +207,8 @@ def comments(page):
         Comment.create_time.desc()
     ).paginate(page=page, per_page=10)
     return render_template('home/comments.html', page_comments=page_comments)
+
+
 
 
 @home.route('/wishlist/<int:page>/')
@@ -217,7 +227,6 @@ def wishlist(page):
         Film.id.in_(wishs)
     ).paginate(page=page, per_page=10)
     return render_template('home/wishlist.html', page_wishlists=page_wishlists)
-
 
 @home.route('/wishlist/watch/<int:user_id>/<int:page>')
 def watch_wishlist(user_id=None, page=None):
@@ -243,7 +252,6 @@ def wishlist_delete(delete_id=None):
     db.session.commit()
     flash('delete success！', category='ok')
     return redirect(url_for('home.wishlist', page=1))
-
 
 @home.route("/comments/delete/<int:delete_id>")
 @user_login_require
