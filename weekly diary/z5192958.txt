@@ -37,5 +37,7 @@ Together with Ziwei Li, we have perfected the back-end management system.
 And tested the new system with the team members, preparing for next week's show.
 
 week8:
-
+Prepared for demo2. Built cloud-database on AWS-EC2 machine. 
+Guarentee that the project can be run on CSE machine. It works.
+On weekend we had group meeting and finished the retrospective-B.
 
