@@ -7,13 +7,15 @@ app = Flask(__name__, instance_relative_config=True)
 app.debug = True
 # two way to connect the database
 # connect to localhost, user:root password:root, or change your own password. The database need to named 'film'
-# app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:root@127.0.0.1:3306/film"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:root@127.0.0.1:3306/film"
 
-# connect to AWS-EC2, free virtual machine, which makes as cloud database, don't need change.
-# Just comment the localhost setting.
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:FilmFinder123,.@18.220.148.52/film"
+# connect to AWS-EC2, free virtual machine, which makes as cloud database, don't need change!
+# Just comment the localhost setting. And uncomment the code below!
+# app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:FilmFinder123,.@18.220.148.52/film"
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+
+# secret key can guarantee the database safety
 app.config['SECRET_KEY'] = 'b1b7ed6af47d4031acbdeb420658ba84'
 app.config['UP_DIR'] = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'static/media/')
 app.config['USER_IMAGE'] = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'static/user/')

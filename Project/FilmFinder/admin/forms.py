@@ -6,15 +6,16 @@ from FilmFinder.models import Admin, Genre, Director, User
 
 
 class LoginFrom(FlaskForm):
+    # admin login form
     account = StringField(
         label='name',
         validators=[
-            DataRequired('please input name!')
+            DataRequired('Please input username!')
         ],
         description='name',
         render_kw={
             'class': "form-control",
-            'placeholder': "please input name",
+            'placeholder': "Please input username",
             'required': "required"
         }
     )
@@ -22,12 +23,12 @@ class LoginFrom(FlaskForm):
     password = PasswordField(
         label='password',
         validators=[
-            DataRequired('please input password!')
+            DataRequired('Please input password!')
         ],
         description='password',
         render_kw={
             'class': "form-control",
-            'placeholder': "please input password",
+            'placeholder': "Please input password",
             'required': "required"
         }
     )
@@ -42,24 +43,25 @@ class LoginFrom(FlaskForm):
         account = field.data
         admin_num = Admin.query.filter_by(name=account).count()
         if admin_num == 0:
-            raise ValidationError('account is not existing')
+            raise ValidationError('Account is not existing')
 
 
 class GenreForm(FlaskForm):
+    # form for add genre type
     name = StringField(
         label='genre',
         validators=[
-            DataRequired('it can not be empty!')
+            DataRequired('It can not be empty!')
         ],
         description='genre',
         render_kw={
             'class': "form-control",
             'id': "input_name",
-            'placeholder': "please input genre!"
+            'placeholder': "Please input genre!"
         }
     )
     submit = SubmitField(
-        label='submit',
+        label='Submit',
         render_kw={
             'class': "btn btn-primary"
         }
@@ -70,13 +72,13 @@ class DirectorForm(FlaskForm):
     name = StringField(
         label='director',
         validators=[
-            DataRequired('it can not be empty!')
+            DataRequired('It can not be empty!')
         ],
         description='director',
         render_kw={
             'class': "form-control",
             'id': "input_name",
-            'placeholder': "please input director!"
+            'placeholder': "Please input director!"
         }
     )
     submit = SubmitField(
@@ -91,7 +93,7 @@ class BlackForm(FlaskForm):
     user_id = SelectField(
         label='genre',
         validators=[
-            DataRequired('please select genre！')
+            DataRequired('Please select genre！')
         ],
         coerce=int,
         description='genre',
@@ -177,7 +179,7 @@ class FilmForm(FlaskForm):
     def __init__(self, *args, **kwargs):
         super(FilmForm, self).__init__(*args, **kwargs)
         self.genre_id.choices = [(v.id, v.name) for v in Genre.query.all()]
-        self.director_id.choices=[(v.id, v.name) for v in Director.query.all()]
+        self.director_id.choices = [(v.id, v.name) for v in Director.query.all()]
 
     release_length = StringField(
         label='release length',
