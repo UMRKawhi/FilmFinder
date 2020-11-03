@@ -15,3 +15,6 @@ write basic parts and completed the Update details page.
 
 week5:
 Worked on frontend for applying projects and listing applied and followed projects with Mingyan Yu.
+
+week6:
+Complete the function of project and modify the shortage.
