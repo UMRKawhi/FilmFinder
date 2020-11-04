@@ -24,3 +24,7 @@ we write basic parts and completed the update details page.
 week 5:
 We start to prepare the first demo 
 Then we discuss the retrospective.
+
+week 6:
+Modified the ORM model and the admin's html. 
+Having a meeting to discuss the weakness.
