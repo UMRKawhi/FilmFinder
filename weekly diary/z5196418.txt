@@ -28,3 +28,9 @@ Then we discuss the retrospective.
 week 6:
 Modified the ORM model and the admin's html. 
 Having a meeting to discuss the weakness.
+
+
+Week7:
+For back-end system， making some changes.   
+Testing the system in different PC. 
+Preparing the demo 2 which is better than the first one.
