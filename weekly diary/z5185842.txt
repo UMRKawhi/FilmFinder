@@ -21,3 +21,5 @@ Complete the function of project and modify the shortage.
 
 week7:
 Start work on rating, finishing project with other team members. Preparing the demo 2 and the report proposal for the project.
+modify the code and optimize interface effect.
+Preparing the 19/11 presentation and testing the project in the CSE machine.
