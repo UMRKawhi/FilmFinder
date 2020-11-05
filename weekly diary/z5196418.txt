@@ -23,7 +23,7 @@ we write basic parts and completed the update details page.
 
 week 5:
 We start to prepare the first demo 
-Then we discuss the retrospective.
+Then we also discuss the retrospective.
 
 week 6:
 Modified the ORM model and the admin's html. 
@@ -33,4 +33,4 @@ Having a meeting to discuss the weakness.
 Week7:
 For back-end system， making some changes.   
 Testing the system in different PC. 
-Preparing the demo 2 which is better than the first one.
+Preparing the progressive demo 2.
