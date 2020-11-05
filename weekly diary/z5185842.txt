@@ -18,3 +18,6 @@ Worked on frontend for applying projects and listing applied and followed projec
 
 week6:
 Complete the function of project and modify the shortage.
+
+week7:
+Start work on rating, finishing project with other team members. Preparing the demo 2 and the report proposal for the project.
