@@ -1,21 +1,20 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField, FileField, SelectMultipleField
-from wtforms import DateTimeField, DateField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField, FileField, SelectMultipleField, \
+    DateTimeField,DateField
 from wtforms.validators import DataRequired, ValidationError, EqualTo
 from FilmFinder.models import Admin, Genre, Director, User
 
 
 class LoginFrom(FlaskForm):
-    # admin login form
     account = StringField(
         label='name',
         validators=[
-            DataRequired('Please input username!')
+            DataRequired('please input name!')
         ],
         description='name',
         render_kw={
             'class': "form-control",
-            'placeholder': "Please input username",
+            'placeholder': "please input name",
             'required': "required"
         }
     )
@@ -23,12 +22,12 @@ class LoginFrom(FlaskForm):
     password = PasswordField(
         label='password',
         validators=[
-            DataRequired('Please input password!')
+            DataRequired('please input password!')
         ],
         description='password',
         render_kw={
             'class': "form-control",
-            'placeholder': "Please input password",
+            'placeholder': "please input password",
             'required': "required"
         }
     )
@@ -43,42 +42,20 @@ class LoginFrom(FlaskForm):
         account = field.data
         admin_num = Admin.query.filter_by(name=account).count()
         if admin_num == 0:
-            raise ValidationError('Account is not existing')
+            raise ValidationError('account is not existing')
 
 
 class GenreForm(FlaskForm):
-    # form for add genre type
     name = StringField(
         label='genre',
         validators=[
-            DataRequired('It can not be empty!')
+            DataRequired('it can not be empty!')
         ],
         description='genre',
         render_kw={
             'class': "form-control",
             'id': "input_name",
-            'placeholder': "Please input genre!"
-        }
-    )
-    submit = SubmitField(
-        label='Submit',
-        render_kw={
-            'class': "btn btn-primary"
-        }
-    )
-
-
-class DirectorForm(FlaskForm):
-    name = StringField(
-        label='director',
-        validators=[
-            DataRequired('It can not be empty!')
-        ],
-        description='director',
-        render_kw={
-            'class': "form-control",
-            'id': "input_name",
-            'placeholder': "Please input director!"
+            'placeholder': "please input genre!"
         }
     )
     submit = SubmitField(
@@ -87,13 +64,30 @@ class DirectorForm(FlaskForm):
             'class': "btn btn-primary"
         }
     )
-
-
+class DirectorForm(FlaskForm):
+    name = StringField(
+        label='director',
+        validators=[
+            DataRequired('it can not be empty!')
+        ],
+        description='director',
+        render_kw={
+            'class': "form-control",
+            'id': "input_name",
+            'placeholder': "please input director!"
+        }
+    )
+    submit = SubmitField(
+        label='submit',
+        render_kw={
+            'class': "btn btn-primary"
+        }
+    )
 class BlackForm(FlaskForm):
     user_id = SelectField(
         label='genre',
         validators=[
-            DataRequired('Please select genre！')
+            DataRequired('please select genre！')
         ],
         coerce=int,
         description='genre',
@@ -112,7 +106,6 @@ class BlackForm(FlaskForm):
             'class': "btn btn-primary"
         }
     )
-
 
 class FilmForm(FlaskForm):
     name = StringField(
@@ -179,7 +172,7 @@ class FilmForm(FlaskForm):
     def __init__(self, *args, **kwargs):
         super(FilmForm, self).__init__(*args, **kwargs)
         self.genre_id.choices = [(v.id, v.name) for v in Genre.query.all()]
-        self.director_id.choices = [(v.id, v.name) for v in Director.query.all()]
+        self.director_id.choices=[(v.id, v.name) for v in Director.query.all()]
 
     release_length = StringField(
         label='release length',
