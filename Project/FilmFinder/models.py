@@ -1,12 +1,15 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+# @Time   : 2020/10/4 14:20
 import datetime
-from . import db
 
+from . import db
 
 class User(db.Model):
     __tablename__ = 'user'
     # id
     id = db.Column(db.Integer, primary_key=True)
-    # username
+    # nick name
     name = db.Column(db.String(11), unique=True, nullable=True)
     # first name
     first_name = db.Column(db.String(20))
@@ -22,7 +25,7 @@ class User(db.Model):
     face = db.Column(db.String(255), unique=True)
     # register time
     register_time = db.Column(db.DateTime, default=datetime.datetime.now)
-    # foreign constraints
+    # foregin constraints
     userlogs = db.relationship('UserLog', backref='user')
     # comment constraints
     comments = db.relationship('Comment', backref='user')
@@ -31,12 +34,10 @@ class User(db.Model):
     # blacklist
     blacklist = db.relationship('BlackList', backref='user')
     # check password
-
     def check_password(self, password):
         from werkzeug.security import check_password_hash
         return check_password_hash(self.password, password)
     # format output
-
     def __str__(self):
         return "<User %r>" % self.first_name + " " + self.second_name
 
@@ -96,6 +97,7 @@ class Director(db.Model):
     face = db.Column(db.String(255))
     # foreign constraint of Film
     film = db.relationship('Direct', backref='director')
+
     # create time
     create_time = db.Column(db.DateTime, index=True, default=datetime.datetime.now)
 
@@ -165,13 +167,11 @@ class Film(db.Model):
     # genre constraint
     genre = db.relationship('GenreTag', backref='film')
     # format output
-
     def __str__(self):
         return "<Film %r>" % self.name
 
     def __repr__(self):
         return "<Film %r>" % self.name
-
 
 class Comment(db.Model):
     __tablename__ = 'comment'
@@ -214,7 +214,6 @@ class Direct(db.Model):
     def __repr__(self):
         return "<Direct %r>" % self.id
 
-
 class GenreTag(db.Model):
     __tablename__ = 'genretag'
     # id
@@ -251,6 +250,9 @@ class Performance(db.Model):
 
     def __repr__(self):
         return "<Cast %r>" % self.id
+
+
+
 
 
 class BlackList(db.Model):
