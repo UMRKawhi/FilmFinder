@@ -1,21 +1,18 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+# @Time   : 2020/10/1 12:46
+
 import os
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
+
 # create and configure the app
 app = Flask(__name__, instance_relative_config=True)
-app.debug = True
-# two way to connect the database
-# connect to localhost, user:root password:root, or change your own password. The database need to named 'film'
+app.debug=True
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:root@127.0.0.1:3306/film"
-
-# connect to AWS-EC2, free virtual machine, which makes as cloud database, don't need change!
-# Just comment the localhost setting. And uncomment the code below!
-# app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:FilmFinder123,.@18.220.148.52/film"
-
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-
-# secret key can guarantee the database safety
 app.config['SECRET_KEY'] = 'b1b7ed6af47d4031acbdeb420658ba84'
 app.config['UP_DIR'] = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'static/media/')
 app.config['USER_IMAGE'] = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'static/user/')
@@ -23,9 +20,19 @@ app.config['USER_IMAGE'] = os.path.join(os.path.abspath(os.path.dirname(__file__
 
 db = SQLAlchemy(app)
 
-# import the blueprint to initialize
 from FilmFinder.admin import admin as admin_blueprint
 from FilmFinder.home import home as home_blueprint
 
 app.register_blueprint(admin_blueprint)
 app.register_blueprint(home_blueprint)
+
+# # 404 page
+# @app.errorhandler(404)
+# def page_not_found(error):
+#     return render_template('404.html'), 404
+#
+#
+# # 401 page
+# @app.errorhandler(401)
+# def unauthorized_access(error):
+#     return render_template('401.html'), 401
