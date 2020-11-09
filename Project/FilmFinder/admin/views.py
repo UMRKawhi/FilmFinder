@@ -1,3 +1,11 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+# @Time   : 2020/10/1 12:52
+from flask import render_template, redirect, url_for
+
+from . import admin
+
+
 from . import admin
 from flask import render_template, redirect, url_for, flash, session, request, abort
 from .forms import LoginFrom, GenreForm, FilmForm, DirectorForm, BlackForm
@@ -62,7 +70,7 @@ def genre_add():
         tag_num = Genre.query.filter_by(name=data['name']).count()
         if tag_num == 1:
             flash('Genre is already existing！', category='err')
-            return redirect(url_for('admin.tag_add'))
+            return redirect(url_for('admin.genre_add'))
         genre = Genre(
             name=data['name']
         )
@@ -93,7 +101,6 @@ def genre_delete(delete_id=None):
         db.session.commit()
         flash('delete successfully！', category='ok')
     return redirect(url_for('admin.genre_list', page=1))
-
 
 @admin.route("/blacklist/add/", methods=['GET', 'POST'])
 @admin_login_require
@@ -175,6 +182,8 @@ def director_delete(delete_id=None):
     return redirect(url_for('admin.director_list', page=1))
 
 
+
+
 @admin.route("/film/add/", methods=['GET', 'POST'])
 @admin_login_require
 def film_add():
@@ -250,6 +259,10 @@ def film_delete(delete_id=None):
     return redirect(url_for('admin.film_list', page=1))
 
 
+
+
+
+
 @admin.route("/comment/list/<int:page>/")
 @admin_login_require
 def comment_list(page=None):
@@ -276,3 +289,9 @@ def comment_delete(delete_id=None):
     db.session.commit()
     flash('delete successfully！', category='ok')
     return redirect(url_for('admin.comment_list', page=1))
+
+
+
+
+
+
