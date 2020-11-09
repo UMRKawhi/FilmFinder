@@ -41,3 +41,8 @@ Prepared for demo2. Built cloud-database on AWS-EC2 machine.
 Guarentee that the project can be run on CSE machine. It works.
 On weekend we had group meeting and finished the retrospective-B.
 
+week9:
+Fix bugs and submitted the retrospective-b report.
+Finished the final report.
+Still preparing for the final demonstration.
+
