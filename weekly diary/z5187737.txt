@@ -22,3 +22,7 @@ Modified the ORM model and the admin's html. Discuss the existing weakness.
 Week7:
 Made some changes in the back-end system and tested the system in different PC. 
 Prepare for the progressive demo 2.
+
+Week8:
+Doing progressive demo 2 and retrospective 2.
+Start writing the final report.
