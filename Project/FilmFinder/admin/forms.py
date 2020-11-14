@@ -7,14 +7,14 @@ from FilmFinder.models import Admin, Genre, Director, User
 
 class LoginFrom(FlaskForm):
     account = StringField(
-        label='name',
+        label='Name',
         validators=[
-            DataRequired('please input name!')
+            DataRequired('Please input name!')
         ],
-        description='name',
+        description='Name',
         render_kw={
             'class': "form-control",
-            'placeholder': "please input name",
+            'placeholder': "Please input name",
             'required': "required"
         }
     )
@@ -22,12 +22,12 @@ class LoginFrom(FlaskForm):
     password = PasswordField(
         label='password',
         validators=[
-            DataRequired('please input password!')
+            DataRequired('Please input password!')
         ],
-        description='password',
+        description='Password',
         render_kw={
             'class': "form-control",
-            'placeholder': "please input password",
+            'placeholder': "Please input password",
             'required': "required"
         }
     )
@@ -42,24 +42,24 @@ class LoginFrom(FlaskForm):
         account = field.data
         admin_num = Admin.query.filter_by(name=account).count()
         if admin_num == 0:
-            raise ValidationError('account is not existing')
+            raise ValidationError('Account is not existing')
 
 
 class GenreForm(FlaskForm):
     name = StringField(
-        label='genre',
+        label='Genre',
         validators=[
-            DataRequired('it can not be empty!')
+            DataRequired('It can not be empty!')
         ],
         description='genre',
         render_kw={
             'class': "form-control",
             'id': "input_name",
-            'placeholder': "please input genre!"
+            'placeholder': "Please input genre!"
         }
     )
     submit = SubmitField(
-        label='submit',
+        label='Submit',
         render_kw={
             'class': "btn btn-primary"
         }
@@ -89,12 +89,12 @@ class DirectorForm(FlaskForm):
 
 class BlackForm(FlaskForm):
     user_id = SelectField(
-        label='genre',
+        label='Genre',
         validators=[
-            DataRequired('please select genre！')
+            DataRequired('Please select genre！')
         ],
         coerce=int,
-        description='genre',
+        description='Genre',
         render_kw={
             'class': "form-control"
         }
@@ -105,7 +105,7 @@ class BlackForm(FlaskForm):
         self.user_id.choices = [(v.id, v.name) for v in User.query.all()]
 
     submit = SubmitField(
-        label='submit',
+        label='Submit',
         render_kw={
             'class': "btn btn-primary"
         }
@@ -114,22 +114,22 @@ class BlackForm(FlaskForm):
 
 class FilmForm(FlaskForm):
     name = StringField(
-        label='name',
+        label='Name',
         validators=[
-            DataRequired('please input name!')
+            DataRequired('please input Name!')
         ],
-        description='name',
+        description='Name',
         render_kw={
             'class': "form-control",
-            'placeholder': "please input name!"
+            'placeholder': "Please input name!"
         }
     )
     description = TextAreaField(
-        label='description',
+        label='Description',
         validators=[
-            DataRequired('please input description!')
+            DataRequired('Please input description!')
         ],
-        description='description',
+        description='Description',
         render_kw={
             'class': "form-control",
             'rows': "10",
@@ -138,13 +138,13 @@ class FilmForm(FlaskForm):
     logo = FileField(
         label='logo',
         validators=[
-            DataRequired('please upload logo！')
+            DataRequired('Please upload logo！')
         ],
-        description='logo',
+        description='Logo',
     )
     star = SelectField(
-        label='star',
-        description='star',
+        label='Star',
+        description='Star',
         coerce=int,
         choices=[(0, '0 star'), (1, '1 star'), (2, '2 star'), (3, '3 star'), (4, '4 star'), (5, '5 star')],
         render_kw={
@@ -152,23 +152,23 @@ class FilmForm(FlaskForm):
         }
     )
     genre_id = SelectField(
-        label='genre',
+        label='Genre',
         validators=[
-            DataRequired('please select genre！')
+            DataRequired('Please select genre！')
         ],
         coerce=int,
-        description='genre',
+        description='Genre',
         render_kw={
             'class': "form-control"
         }
     )
     director_id = SelectField(
-        label='director',
+        label='Director',
         validators=[
-            DataRequired('please select director！')
+            DataRequired('Please select director！')
         ],
         coerce=int,
-        description='director',
+        description='Director',
         render_kw={
             'class': "form-control"
         }
@@ -180,30 +180,30 @@ class FilmForm(FlaskForm):
         self.director_id.choices=[(v.id, v.name) for v in Director.query.all()]
 
     release_length = StringField(
-        label='release length',
+        label='Release length',
         validators=[
             DataRequired('please input release length!')
         ],
-        description='release length',
+        description='Release length',
         render_kw={
             'class': "form-control",
-            'placeholder': "please input release length!",
+            'placeholder': "Please input release length!",
         }
     )
     release_time = DateField(
-        label='release time',
+        label='Release time',
         validators=[
-            DataRequired('please select release time!')
+            DataRequired('Please select release time!')
         ],
-        description='release time',
+        description='Release time',
         render_kw={
             'class': "form-control",
-            'placeholder': "please select release time!",
+            'placeholder': "Please select release time!",
             'id': "input_release_time"
         }
     )
     submit = SubmitField(
-        label='submit',
+        label='Submit',
         render_kw={
             'class': "btn btn-primary"
         }
