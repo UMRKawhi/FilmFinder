@@ -1,4 +1,4 @@
-# define blueprint of manage function
+# define blueprint of admin
 from flask import Blueprint
 admin = Blueprint("admin", "admin", url_prefix="/admin")
 

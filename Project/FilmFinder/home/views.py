@@ -287,7 +287,7 @@ def search(page=None):
         Film.name.ilike("%" + keyword + "%"),
     ).order_by(
         Film.star.desc(),
-        Film.name.desc()
+        Film.name.asc()
     ).paginate(page=page, per_page=10)
     search_count = Film.query.filter(Film.name.ilike("%" + keyword + "%")).count()
     print(search_count)
@@ -296,7 +296,7 @@ def search(page=None):
             Film.description.ilike("%" + keyword + "%")
         ).order_by(
             Film.star.desc(),
-            Film.name.desc()
+            Film.name.asc()
         ).paginate(page=page, per_page=10)
         search_count = Film.query.filter(
             Film.description.ilike("%" + keyword + "%")
@@ -308,7 +308,7 @@ def search(page=None):
             Genre.name.ilike("%" + keyword + "%")
         ).order_by(
             Film.star.desc(),
-            Film.name.desc()
+            Film.name.asc()
         ).paginate(page=page, per_page=10)
         search_count = Film.query.join(GenreTag).join(Genre).filter(
             Film.id == GenreTag.film_id,
@@ -322,7 +322,7 @@ def search(page=None):
             Director.name.ilike("%" + keyword + "%")
         ).order_by(
             Film.star.desc(),
-            Film.name.desc()
+            Film.name.asc()
         ).paginate(page=page, per_page=10)
         search_count = Film.query.join(Direct).join(Director).filter(
             Film.id == Direct.film_id,

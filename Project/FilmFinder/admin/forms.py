@@ -68,19 +68,19 @@ class GenreForm(FlaskForm):
 
 class DirectorForm(FlaskForm):
     name = StringField(
-        label='director',
+        label='Director',
         validators=[
-            DataRequired('it can not be empty!')
+            DataRequired('It can not be empty!')
         ],
-        description='director',
+        description='Director',
         render_kw={
             'class': "form-control",
             'id': "input_name",
-            'placeholder': "please input director!"
+            'placeholder': "Please input director!"
         }
     )
     submit = SubmitField(
-        label='submit',
+        label='Submit',
         render_kw={
             'class': "btn btn-primary"
         }
