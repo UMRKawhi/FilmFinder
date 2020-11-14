@@ -1,0 +1,29 @@
+COMP9900 H18A-ChongChongChong
+Kaisen Luo z5185842
+ 
+week1:
+We Completed the team and determine the topic chongchongchong, chosed the project and discussed with team members to creat project thinking and structure.
+
+week2:
+In this week, we prepare project proposal and discussed related information, finished some draft of projects.
+
+week3:
+Created the project proposal. Continued to prepare the users' stories.
+
+week4:
+write basic parts and completed the Update details page.
+
+week5:
+Worked on frontend for applying projects and listing applied and followed projects with Mingyan Yu.
+
+week6:
+Complete the function of project and modify the shortage.
+
+week7:
+Start work on rating, finishing project with other team members. Preparing the demo 2 and the report proposal for the project.
+modify the code and optimize interface effect.
+Preparing the 19/11 presentation and testing the project in the CSE machine.
+
+week8:
+help prepare the demo 2, fix up the report and the program.
+allocating task for the final demo presentation.
