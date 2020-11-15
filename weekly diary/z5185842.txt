@@ -27,3 +27,7 @@ Preparing the 19/11 presentation and testing the project in the CSE machine.
 week8:
 help prepare the demo 2, fix up the report and the program.
 allocating task for the final demo presentation.
+
+week9:
+prepare the final presentation.
+continue finshing the final report.
