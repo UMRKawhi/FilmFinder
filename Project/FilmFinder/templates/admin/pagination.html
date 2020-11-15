@@ -1,4 +1,5 @@
 {% macro render_pagination(pagination, url_route) %}
+    <!--pagination为分页数据，url为指定分页的路由，需要给路由带上page参数，指定页数-->
     <ul class="pagination pagination-sm no-margin pull-right">
         <li><a href="{{ url_for(url_route, page=1) }}">Home</a></li>
 

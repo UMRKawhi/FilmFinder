@@ -32,6 +32,7 @@ def index():
     return render_template('admin/index.html')
 
 
+# admin login
 @admin.route("/login/", methods=['GET', 'POST'])
 def login():
     form = LoginFrom()
@@ -39,13 +40,14 @@ def login():
         data = form.data
         login_admin = Admin.query.filter_by(name=data['account']).first()
         if not login_admin.check_pwd(data['password']):
-            flash('password error！')
+            flash('Password error!')
             return redirect(url_for('admin.login'))
         session['login_admin'] = data['account']
         return redirect(request.args.get('next') or url_for('admin.index'))
     return render_template('admin/login.html', form=form)
 
 
+# admin logout
 @admin.route("/logout/")
 @admin_login_require
 def logout():
@@ -53,16 +55,19 @@ def logout():
     return redirect(url_for("admin.login"))
 
 
+# basic function - add genre
 @admin.route("/Genre/add/", methods=['GET', 'POST'])
 @admin_login_require
 def genre_add():
     form = GenreForm()
     if form.validate_on_submit():
         data = form.data
+        # check whether the green has existed
         tag_num = Genre.query.filter_by(name=data['name']).count()
         if tag_num == 1:
-            flash('Genre is already existing！', category='err')
+            flash('Genre is already existing!', category='err')
             return redirect(url_for('admin.genre_add'))
+        # not existed add genre
         genre = Genre(
             name=data['name']
         )
@@ -70,13 +75,15 @@ def genre_add():
         db.session.add(genre)
         db.session.commit()
         print("commit")
-        flash('add successfully！', category='ok')
+        flash('Add successfully!', category='ok')
         return redirect(url_for('admin.genre_add'))
     return render_template('admin/genre_add.html', form=form)
 
 
+# check all genres in the database
 @admin.route("/genre/list/<int:page>/", methods=['GET'])
 @admin_login_require
+# default start from page 1
 def genre_list(page=None):
     if page is None:
         page = 1
@@ -84,6 +91,7 @@ def genre_list(page=None):
     return render_template('admin/genre_list.html', page_genres=page_genres)
 
 
+# delete genre
 @admin.route("/genre/delete/<int:delete_id>/", methods=['GET'])
 @admin_login_require
 def genre_delete(delete_id=None):
@@ -91,50 +99,11 @@ def genre_delete(delete_id=None):
         genre = Genre.query.filter_by(id=delete_id).first_or_404()
         db.session.delete(genre)
         db.session.commit()
-        flash('delete successfully！', category='ok')
+        flash('Delete successfully!', category='ok')
     return redirect(url_for('admin.genre_list', page=1))
 
 
-@admin.route("/blacklist/add/", methods=['GET', 'POST'])
-@admin_login_require
-def blacklist_add():
-    form = BlackForm()
-    if form.validate_on_submit():
-        data = form.data
-        black_num = BlackList.query.filter_by(user_id=data['user_id']).count()
-        if black_num == 1:
-            flash('blacklist is already existing！', category='err')
-            return redirect(url_for('admin.blacklist_add'))
-        blacklist = BlackList(
-            user_id=data['user_id']
-        )
-        db.session.add(blacklist)
-        db.session.commit()
-        flash('add successfully！', category='ok')
-        return redirect(url_for('admin.blacklist_add'))
-    return render_template('admin/blacklist_add.html', form=form)
-
-
-@admin.route("/blacklist/list/<int:page>/", methods=['GET'])
-@admin_login_require
-def blacklist_list(page=None):
-    if page is None:
-        page = 1
-    page_blacklists = BlackList.query.order_by(BlackList.create_time.desc()).paginate(page=page, per_page=10)
-    return render_template('admin/blacklist_list.html', page_blacklists=page_blacklists)
-
-
-@admin.route("/blacklist/delete/<int:delete_id>/", methods=['GET'])
-@admin_login_require
-def blacklist_delete(delete_id=None):
-    if delete_id:
-        blacklist = BlackList.query.filter_by(id=delete_id).first_or_404()
-        db.session.delete(blacklist)
-        db.session.commit()
-        flash('delete successfully！', category='ok')
-    return redirect(url_for('admin.blacklist_list', page=1))
-
-
+# basic function - add director
 @admin.route("/director/add/", methods=['GET', 'POST'])
 @admin_login_require
 def director_add():
@@ -143,18 +112,19 @@ def director_add():
         data = form.data
         director_num = Director.query.filter_by(name=data['name']).count()
         if director_num == 1:
-            flash('Genre is already existing！', category='err')
+            flash('Genre is already existing!', category='err')
             return redirect(url_for('admin.director_add'))
         director = Director(
             name=data['name']
         )
         db.session.add(director)
         db.session.commit()
-        flash('add successfully！', category='ok')
+        flash('Add successfully!', category='ok')
         return redirect(url_for('admin.director_add'))
     return render_template('admin/director_add.html', form=form)
 
 
+# check all directors in the database
 @admin.route("/director/list/<int:page>/", methods=['GET'])
 @admin_login_require
 def director_list(page=None):
@@ -164,6 +134,7 @@ def director_list(page=None):
     return render_template('admin/director_list.html', page_directors=page_directors)
 
 
+# delete director
 @admin.route("/director/delete/<int:delete_id>/", methods=['GET'])
 @admin_login_require
 def director_delete(delete_id=None):
@@ -171,10 +142,11 @@ def director_delete(delete_id=None):
         director = Director.query.filter_by(id=delete_id).first_or_404()
         db.session.delete(director)
         db.session.commit()
-        flash('delete successfully！', category='ok')
+        flash('Delete successfully!', category='ok')
     return redirect(url_for('admin.director_list', page=1))
 
 
+# common function - add movie
 @admin.route("/film/add/", methods=['GET', 'POST'])
 @admin_login_require
 def film_add():
@@ -183,7 +155,7 @@ def film_add():
         data = form.data
 
         if Film.query.filter_by(name=data['name']).count() == 1:
-            flash('Film already exists', category='err')
+            flash('Film already exists!', category='err')
             return redirect(url_for('admin.film_add'))
 
         file_logo = secure_filename(form.logo.data.filename)
@@ -213,11 +185,12 @@ def film_add():
         print("success")
         db.session.add(film)
         db.session.commit()
-        flash('add successfully', 'ok')
+        flash('Add successfully!', 'ok')
         return redirect(url_for('admin.film_add'))
     return render_template('admin/film_add.html', form=form)
 
 
+# check all movies in the database
 @admin.route("/film/list/<int:page>/", methods=['GET'])
 @admin_login_require
 def film_list(page=None):
@@ -233,6 +206,7 @@ def film_list(page=None):
     return render_template('admin/film_list.html', page_films=page_films)
 
 
+# delete film
 @admin.route("/film/delete/<int:delete_id>/", methods=['GET'])
 @admin_login_require
 def film_delete(delete_id=None):
@@ -246,33 +220,5 @@ def film_delete(delete_id=None):
 
         db.session.delete(film)
         db.session.commit()
-        flash('delete successfully！', category='ok')
+        flash('Delete successfully!', category='ok')
     return redirect(url_for('admin.film_list', page=1))
-
-
-@admin.route("/comment/list/<int:page>/")
-@admin_login_require
-def comment_list(page=None):
-    if page is None:
-        page = 1
-    page_comments = Comment.query.join(
-        Film
-    ).join(
-        User
-    ).filter(
-        Film.id == Comment.film_id,
-        User.id == Comment.user_id
-    ).order_by(
-        Comment.add_time.desc()
-    ).paginate(page=page, per_page=10)
-    return render_template('admin/comment_list.html', page_comments=page_comments)
-
-
-@admin.route("/comment/delete/<int:delete_id>")
-@admin_login_require
-def comment_delete(delete_id=None):
-    comment = Comment.query.get_or_404(delete_id)
-    db.session.delete(comment)
-    db.session.commit()
-    flash('delete successfully！', category='ok')
-    return redirect(url_for('admin.comment_list', page=1))
