@@ -26,3 +26,6 @@ Prepare for the progressive demo 2.
 Week8:
 Doing progressive demo 2 and retrospective 2.
 Start writing the final report.
+
+Week9:
+Finish writing the final report. Prepare for the final presentation.
