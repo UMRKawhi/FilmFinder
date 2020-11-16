@@ -46,3 +46,8 @@ Fix bugs and submitted the retrospective-b report.
 Finished the final report.
 Still preparing for the final demonstration.
 
+week10:
+Preparating for final presentation. Finshed the final report.
+Add enough movie into the databse with Ziwei Li.
+Setting AWS EC2 and Google Cloud with Mingyan Yu.
+Change the front-end font display problem with Kaisen Luo.
