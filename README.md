@@ -10,8 +10,8 @@ Ziwei Li | z5187737 | Developer
 Mingyan Yu | z5196418 | Developer
 Kaisen Luo | z5185842 | Developer
 # How to Use？
-**Question about how to run program? Please check the final report.**
-[Final Report]: https://github.com/unsw-cse-capstone-project/capstone-project-comp9900-h18a-chongchongchong/blob/master/submission/Report/9900_report_final%20version.pdf "Final Report"
+**Question about how to run program? Please check the final report.** <br>
+[Final Report]: https://github.com/unsw-cse-capstone-project/capstone-project-comp9900-h18a-chongchongchong/blob/master/submission/Report/9900_report_final%20version.pdf/ "Final Report"
 # System Architecture
 This project is based on Python3 framework, using bootstrap and flask to build the front-end and back-end. For Database, we select Mysql(version 5.7). The Database GUI is Navicat, which can run the SQL script and can improve the efficiency. The required library are:
 + click==7.1.2
