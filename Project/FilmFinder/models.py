@@ -21,7 +21,7 @@ class User(db.Model):
     face = db.Column(db.String(255), unique=True)
     # register time
     register_time = db.Column(db.DateTime, default=datetime.datetime.now)
-    # foreign constraints
+    # foregin constraints
     userlogs = db.relationship('UserLog', backref='user')
     # comment constraints
     comments = db.relationship('Comment', backref='user')
@@ -30,11 +30,9 @@ class User(db.Model):
     # blacklist
     blacklist = db.relationship('BlackList', backref='user')
     # check password
-
     def check_password(self, password):
         from werkzeug.security import check_password_hash
         return check_password_hash(self.password, password)
-
     # format output
     def __str__(self):
         return "<User %r>" % self.first_name + " " + self.second_name
@@ -164,13 +162,13 @@ class Film(db.Model):
     director = db.relationship('Direct', backref='film')
     # genre constraint
     genre = db.relationship('GenreTag', backref='film')
-
     # format output
     def __str__(self):
         return "<Film %r>" % self.name
 
     def __repr__(self):
         return "<Film %r>" % self.name
+
 
 class Comment(db.Model):
     __tablename__ = 'comment'

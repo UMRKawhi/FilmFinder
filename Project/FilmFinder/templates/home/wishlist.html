@@ -27,8 +27,8 @@
                             </div>
                             <div class="media-body">
                                 <h4 class="media-heading">{{ wishfilm.name }}
-                                    <a href="{{ url_for('home.detail', id=wishfilm.id, page=1) }}" class="label label-primary pull-right"><span class="glyphicon glyphicon-play"></span>film detail</a>
-                                    <a href="{{ url_for('home.wishlist_delete', delete_id=wishfilm.id) }}" class="label label-primary pull-right"><span class="glyphicon glyphicon-play"></span>delete</a>
+                                    <a href="{{ url_for('home.detail', id=wishfilm.id, page=1) }}" class="label label-primary pull-right"><span class="glyphicon glyphicon-play"></span>Film detail</a>
+                                    <a href="{{ url_for('home.wishlist_delete', delete_id=wishfilm.id) }}" class="label label-primary pull-right"><span class="glyphicon glyphicon-play"></span>Delete</a>
                                 </h4>
                                 <div style="height: 100px;  overflow-y: auto; overflow-x: hidden;">
                                 {{ wishfilm.description }}

@@ -4,8 +4,8 @@
     <section class="content-header">
         <h1>FilmFinder Admin</h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Genre Management</a></li>
-            <li class="active">Genre List</li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Banned Management</a></li>
+            <li class="active">Banned list</li>
         </ol>
     </section>
     <section class="content" id="showcontent">
@@ -13,8 +13,17 @@
             <div class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">Genre list</h3>
+                        <h3 class="box-title">Banned list</h3>
                         <div class="box-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control pull-right"
+                                       placeholder="please input keyword...">
+
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="box-body table-responsive no-padding">
@@ -34,17 +43,17 @@
                             <tbody>
                             <tr>
                                 <th>id</th>
-                                <th>name</th>
+                                <th>user_id</th>
                                 <th>create time</th>
                                 <th>options</th>
                             </tr>
-                            {% for genre in page_genres.items %}
+                            {% for genre in page_blacklists.items %}
                                 <tr>
                                     <td>{{ genre.id }}</td>
                                     <td>{{ genre.name }}</td>
                                     <td>{{ genre.create_time }}</td>
                                     <td>&nbsp;
-                                        <a class="label label-danger" href="{{ url_for('admin.genre_delete', delete_id=genre.id) }}">delete</a>
+                                        <a class="label label-danger" href="{{ url_for('admin.blacklist_delete', delete_id=genre.id) }}">delete</a>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -53,7 +62,7 @@
                     </div>
                     <div class="box-footer clearfix">
                         {% import 'admin/pagination.html' as pg %}
-                        {{ pg.render_pagination(page_genres, 'admin.genre_list') }}
+                        {{ pg.render_pagination(page_blacklists, 'admin.blacklist_list') }}
                     </div>
                 </div>
             </div>
@@ -64,8 +73,8 @@
 {% block js %}
     <script>
         $(document).ready(function () {
-            $("#g-2").addClass('active');
-            $("#g-2-2").addClass('active');
+            $("#g-5").addClass('active');
+            $("#g-5-2").addClass('active');
         })
     </script>
 {% endblock %}

@@ -10,7 +10,7 @@ class RegisterForm(FlaskForm):
         validators=[
             DataRequired('please input nick name!')
         ],
-        description='noick name',
+        description='nick name',
         render_kw={
             'class': "form-control input-lg",
             'placeholder': "please input nick name!",

@@ -287,7 +287,7 @@ def search(page=None):
         Film.name.ilike("%" + keyword + "%"),
     ).order_by(
         Film.star.desc(),
-        Film.name.desc()
+        Film.name.asc()
     ).paginate(page=page, per_page=10)
     search_count = Film.query.filter(Film.name.ilike("%" + keyword + "%")).count()
     print(search_count)
@@ -296,7 +296,7 @@ def search(page=None):
             Film.description.ilike("%" + keyword + "%")
         ).order_by(
             Film.star.desc(),
-            Film.name.desc()
+            Film.name.asc()
         ).paginate(page=page, per_page=10)
         search_count = Film.query.filter(
             Film.description.ilike("%" + keyword + "%")
@@ -308,7 +308,7 @@ def search(page=None):
             Genre.name.ilike("%" + keyword + "%")
         ).order_by(
             Film.star.desc(),
-            Film.name.desc()
+            Film.name.asc()
         ).paginate(page=page, per_page=10)
         search_count = Film.query.join(GenreTag).join(Genre).filter(
             Film.id == GenreTag.film_id,
@@ -322,7 +322,7 @@ def search(page=None):
             Director.name.ilike("%" + keyword + "%")
         ).order_by(
             Film.star.desc(),
-            Film.name.desc()
+            Film.name.asc()
         ).paginate(page=page, per_page=10)
         search_count = Film.query.join(Direct).join(Director).filter(
             Film.id == Direct.film_id,
@@ -371,7 +371,8 @@ def detail(id=None, page=None):
     page_recommendations = Film.query.filter(
         Film.id != film.id
     ).order_by(
-        Film.star.desc()
+        Film.star.desc(),
+        Film.name.asc()
     ).paginate(page=1, per_page=10)
     last_film_id = None
 
@@ -430,7 +431,8 @@ def detail(id=None, page=None):
                     Film.id != film.id,
                     GenreTag.genre_id.in_(genre_list)
                 ).order_by(
-                    Film.star.desc()
+                    Film.star.desc(),
+                    Film.name.asc()
                 ).paginate(page=1, per_page=10)
             if recommendation == 'director':
                 director_list = []
@@ -443,7 +445,8 @@ def detail(id=None, page=None):
                     Film.id != film.id,
                     Direct.director_id.in_(director_list)
                 ).order_by(
-                    Film.star.desc()
+                    Film.star.desc(),
+                    Film.name.asc()
                 ).paginate(page=1, per_page=10)
         ip = request.remote_addr
         userlog = UserLog(user_id=user_id, ip=ip, film_id=id)

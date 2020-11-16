@@ -46,11 +46,11 @@
             
         </div>
         {% if user.get('login_user_id') %}
-            <div class="login_text"><a href="{{ url_for('home.logout') }}">LOGOUT</a></div>
-            <div class="login_text"><a href="{{ url_for('home.user') }}">USER</a></div>
+            <div class="login_text"><a href="{{ url_for('home.logout') }}">Logout</a></div>
+            <div class="login_text"><a href="{{ url_for('home.user') }}">User</a></div>
             {% else %}
-            <div class="login_text"><a href="{{ url_for('home.login') }}">LOGIN HERE</a></div>
-            <div class="login_text"><a href="{{ url_for('home.register') }}">REGISTER </a></div>
+            <div class="login_text"><a href="{{ url_for('home.login') }}">Login Here</a></div>
+            <div class="login_text"><a href="{{ url_for('home.register') }}">Register</a></div>
         {% endif %} 
 
     </nav>
@@ -65,20 +65,20 @@
 		    </div>
 		    <div class="box_main">
 		    	<label class="radio-inline there_text">
-		    		<input type="radio" name="type" id='type1' value="name" checked>name
+		    		<input type="radio" name="type" id='type1' value="name" checked>Name
 		    	</label>
 		    	<label class="radio-inline there_text">
-		    		<input type="radio" name="type" id='type2' value="description">description
+		    		<input type="radio" name="type" id='type2' value="description">Description
 		    	</label>
 		    	<label class="radio-inline there_text">
-		    		<input type="radio" name="type" id='type3' value="genre">genre
+		    		<input type="radio" name="type" id='type3' value="genre">Genre
 		    	</label>
                 <label class="radio-inline there_text">
-		    		<input type="radio" name="type" id='type4' value="director">director
+		    		<input type="radio" name="type" id='type4' value="director">Director
 		    	</label>
 		    	
 		    </div>
-		    <p class="there_text" style="font-size: 50px">FilmFinder is a website for review movies</p>
+		    <p class="there_text" style="font-size: 40px">FilmFinder is a website for review movies</p>
 		    <div class="bt_main" >
 
 		    </div>

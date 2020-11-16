@@ -33,7 +33,7 @@
                                         <a class="comment-author" href="{{ url_for('home.user') }}">{{ comment.user.name }}</a>
                                         comment on
                                         <time title="{{ comment.create_time }}" datetime="{{ comment.create_time }}">{{ comment.create_time }}</time>
-                                        <a href="{{url_for('home.comments_delete', delete_id=comment.id)}}" class="label label-primary pull-right"><span class="glyphicon glyphicon-play"></span>delete</a>
+                                        <a href="{{url_for('home.comments_delete', delete_id=comment.id)}}" class="label label-primary pull-right"><span class="glyphicon glyphicon-play"></span>Delete</a>
                                     </div>
 
                                 </header>
