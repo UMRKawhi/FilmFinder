@@ -31,3 +31,7 @@ allocating task for the final demo presentation.
 week9:
 prepare the final presentation.
 continue finshing the final report.
+
+week10:
+Preparating for final presentation. Finshed the final report.
+Change the front-end font display problem.
