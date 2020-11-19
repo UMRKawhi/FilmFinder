@@ -42,3 +42,9 @@ Have a meeting and prepare for our report.
 Week 9:
 Finish the report.
 Prepare for final presentation.
+
+Week 10:
+Preparing for final presentation. 
+Finshing the final report.
+Setting AWS EC2 and Google Cloud with team memebers.
+
